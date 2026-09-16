@@ -1,0 +1,251 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: #171717;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: var(--font-outfit), var(--font-poppins), 'Poppins', sans-serif;
+}
+
+/* Placeholder box for images the user will replace later */
+.img-ph {
+  background-image: repeating-linear-gradient(
+    45deg,
+    #eaeaea,
+    #eaeaea 10px,
+    #f4f4f4 10px,
+    #f4f4f4 20px
+  );
+  border: 1px dashed #cfcfcf;
+  color: #a1a1a1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* ── 3D Product Flip Card Styling (Goshtghar Design System) ── */
+.flip-card {
+  height: 390px;
+  perspective: 1200px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.flip-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.flip-card:hover .flip-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-front,
+.flip-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+}
+
+/* ── Front Face ── */
+.flip-front {
+  background: #ffffff;
+  border: 1px solid #ECECEC;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+}
+
+.flip-front .card-img {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F6F2EE;
+}
+
+.flip-front .card-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  background: #ED1C24;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(237, 28, 36, 0.3);
+}
+
+.flip-front .card-info {
+  padding: 18px 20px;
+  border-top: 1px solid #ECECEC;
+  background: #ffffff;
+}
+
+.flip-front .card-category {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #ED1C24;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.flip-front .card-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #171717;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.flip-front .card-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flip-front .card-price {
+  font-size: 20px;
+  font-weight: 800;
+  color: #171717;
+}
+
+.flip-front .card-price-old {
+  font-size: 13px;
+  color: #767676;
+  text-decoration: line-through;
+  margin-left: 6px;
+  font-weight: 400;
+}
+
+.flip-front .card-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #767676;
+}
+
+/* ── Back Face ── */
+.flip-back {
+  background: #171717;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  color: #ffffff;
+  border: 1px solid #171717;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.flip-back .back-tag {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #ED1C24;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.flip-back .back-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 10px;
+  line-height: 1.25;
+}
+
+.flip-back .back-desc {
+  font-size: 12.5px;
+  color: #d1d5db;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+.flip-back .back-features {
+  list-style: none;
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.flip-back .back-features li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #e5e7eb;
+}
+
+.flip-back .back-features li::before {
+  content: '✓';
+  color: #ED1C24;
+  font-weight: 700;
+}
+
+.flip-back .back-price {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.flip-back .back-price-main {
+  font-size: 26px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.flip-back .back-price-period {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.flip-back .back-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #ED1C24;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 13.5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.flip-back .back-cta:hover {
+  background: #C8151C;
+  transform: scale(1.02);
+}
