@@ -38,12 +38,6 @@ export default function ProductCard({
     >
       {/* Product Image Area */}
       <div className="relative w-full h-52 bg-[#F9F6F3] p-4 flex items-center justify-center overflow-hidden">
-        {tag && (
-          <span className="absolute top-3 left-3 z-10 bg-brand-red text-white text-[11px] font-bold px-2.5 py-1 rounded-md shadow-xs">
-            {tag}
-          </span>
-        )}
-
         {image ? (
           <img
             src={image}
@@ -68,30 +62,23 @@ export default function ProductCard({
             <span className="text-xs font-bold text-brand-red uppercase tracking-wider bg-brand-pink/50 px-2 py-0.5 rounded">
               {cat}
             </span>
-            <div className="flex items-center gap-1 text-xs font-bold text-brand-black bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
-              <StarIcon className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
-              <span>{rating}</span>
-            </div>
           </div>
 
           <h3 className="text-base font-bold text-brand-black leading-snug group-hover:text-brand-red transition-colors line-clamp-2 mb-2 break-words">
             {name}
           </h3>
 
-          <p className="text-xs text-brand-grey mb-4">
-            Available Portions: <span className="font-semibold text-brand-black/80">{sizes}</span>
-          </p>
         </div>
 
         {/* Pricing & CTA */}
         <div className="pt-3 border-t border-gray-100 flex items-center justify-between gap-2">
           <div>
             <span className="text-lg font-extrabold text-brand-red block leading-none">
-              {newPrice}
+              {newPrice?.toString().toLowerCase().includes('rs') ? newPrice : `Rs ${newPrice}`}
             </span>
             {oldPrice && (
               <span className="text-xs font-medium text-gray-400 line-through">
-                {oldPrice}
+                {oldPrice?.toString().toLowerCase().includes('rs') ? oldPrice : `Rs ${oldPrice}`}
               </span>
             )}
           </div>

@@ -99,7 +99,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
             Product Not Found
           </h1>
           <p className="text-brand-grey text-sm max-w-md mx-auto mb-8 leading-relaxed">
-            Yeh product abhi available nahi hai ya update ho raha hai. Aap humare baqi products browse kar sakte hain.
+            This product is currently unavailable or being updated. Please browse our other products.
           </p>
           <div className="flex items-center justify-center gap-4">
             <Link

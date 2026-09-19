@@ -120,7 +120,7 @@ export default function CategoryDetailPage({ params }: CategoryPageProps) {
               </h3>
 
               <p className="text-brand-grey text-sm md:text-base max-w-lg mx-auto mb-8 leading-relaxed">
-                Hum is category ke liye 100% fresh, organic aur high-quality stock prepare kar rahe hain. Jald hi saare products yahan available honge!
+                We are preparing 100% fresh, organic, and high-quality stock for this category. All products will be available here soon!
               </p>
 
               {/* Empty Product Grid Outline Placeholders */}

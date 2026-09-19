@@ -135,7 +135,7 @@ function ShopContent() {
               Products Coming Soon
             </h3>
             <p className="text-brand-grey text-sm mb-6">
-              Hum is category ke liye abhi 100% fresh, organic products ready kar rahe hain. Tamam products jald available honge!
+              We are currently preparing 100% fresh, organic products for this category. All products will be available soon!
             </p>
             <button
               onClick={() => setActiveTab("all")}

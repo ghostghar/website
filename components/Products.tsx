@@ -67,7 +67,7 @@ export default function Products() {
             </div>
             <h3 className="text-xl font-bold text-brand-black mb-2">Fresh Products Coming Soon</h3>
             <p className="text-brand-grey text-sm mb-6">
-              Hum 100% fresh, organic cuts prepare kar rahe hain. Naye products jald hi store par update honge!
+              We are preparing 100% fresh, organic cuts. New products will be updated on the store soon!
             </p>
             <Link
               href="/shop"

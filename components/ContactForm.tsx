@@ -101,7 +101,7 @@ export default function ContactForm() {
                 </div>
                 <h4 className="text-xl font-bold text-brand-black mb-2">Thank You!</h4>
                 <p className="text-brand-grey text-sm max-w-md mx-auto mb-6">
-                  Aapka message hausal-afzai ke sath received ho gaya hai. Goshtghar customer support team jald aap se contact karegi.
+                  Your message has been successfully received. The Goshtghar customer support team will contact you shortly.
                 </p>
                 <button
                   onClick={() => {
