@@ -62,16 +62,7 @@ export default function ContactForm() {
                 </div>
               </div>
 
-              {/* Location */}
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-full bg-brand-pink text-brand-red flex items-center justify-center shrink-0 mt-0.5">
-                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
-                </div>
-                <div>
-                  <strong className="block text-brand-black text-base font-semibold mb-0.5">Farm &amp; Head Office</strong>
-                  <span className="text-brand-grey block">Goshtghar Organic Farm, Main Boulevard, Lahore, Pakistan</span>
-                </div>
-              </div>
+
 
               {/* Timing */}
               <div className="flex items-start gap-4">

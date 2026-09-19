@@ -712,18 +712,7 @@ export default function AdminDashboardPage() {
                   </select>
                 </div>
 
-                <div>
-                  <label className="block text-xs font-semibold text-gray-300 uppercase mb-1">
-                    Badge / Tag
-                  </label>
-                  <input
-                    type="text"
-                    value={productForm.tag}
-                    onChange={(e) => setProductForm({ ...productForm, tag: e.target.value })}
-                    className="w-full bg-[#141414] border border-[#333] rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-[#ED1C24]"
-                    placeholder="e.g. Fresh Farm, Best Seller"
-                  />
-                </div>
+
 
                 <div>
                   <label className="block text-xs font-semibold text-gray-300 uppercase mb-1">
