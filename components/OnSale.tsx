@@ -13,7 +13,8 @@ export default function OnSale() {
       try {
         const res = await fetchProducts();
         if (res.success && res.data && res.data.length > 0) {
-          setFeaturedProduct(res.data[0]);
+          const featured = res.data.find((p: any) => p.isFeatured) || res.data[0];
+          setFeaturedProduct(featured);
         }
       } catch (err) {
         console.warn("Error fetching featured product:", err);
@@ -77,7 +78,7 @@ export default function OnSale() {
             {featuredProduct.name}
           </h2>
 
-          <p className="text-brand-black/80 text-base md:text-lg leading-relaxed mb-8 max-w-lg">
+          <p className="text-brand-black/80 text-base md:text-lg leading-relaxed mb-8 max-w-lg break-words whitespace-pre-wrap">
             {featuredProduct.description || "100% fresh organic farm cut, vacuum packed & Halal certified."}
           </p>
 

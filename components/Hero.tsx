@@ -20,19 +20,21 @@ export default function Hero() {
         </div>
 
         {/* Text */}
-        <div>
+        <div className="text-center lg:text-left">
           <h4 className="text-xl font-medium mb-1">Meat Production</h4>
-          <h1 className="text-5xl md:text-6xl font-extrabold leading-[1.05] mb-5">
+          <h1 className="text-5xl md:text-6xl font-extrabold leading-[1.05] mb-5 mx-auto lg:mx-0">
             Leading Firm
           </h1>
-          <p className="text-brand-grey max-w-sm mb-7">
+          <p className="text-brand-grey max-w-sm mx-auto lg:mx-0 mb-7">
             Distinctively integrate interoperable total linkage and covalent
             processes seamlessly generate.
           </p>
-          <button className="inline-flex items-center gap-2 bg-brand-black hover:bg-black text-white font-semibold px-7 py-3.5 rounded-md transition-colors">
-            <span>Shop Now</span>
-            <ArrowIcon className="w-4 h-4" />
-          </button>
+          <div className="flex justify-center lg:justify-start">
+            <button className="inline-flex items-center gap-2 bg-brand-black hover:bg-black text-white font-semibold px-7 py-3.5 rounded-md transition-colors">
+              <span>Shop Now</span>
+              <ArrowIcon className="w-4 h-4" />
+            </button>
+          </div>
         </div>
 
         {/* Image */}

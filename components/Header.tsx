@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SearchIcon, CartIcon } from "./Icons";
@@ -14,6 +15,7 @@ const shopDropdownItems = [
 ];
 
 export default function Header() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
   const isHomeActive = pathname === "/";
@@ -104,8 +106,8 @@ export default function Header() {
         </nav>
 
         {/* Right Action Icons (Search & Cart only) */}
-        <div className="flex items-center gap-5">
-          <button aria-label="search" className="text-brand-black/80 hover:text-brand-red transition-colors">
+        <div className="flex items-center gap-4 lg:gap-5">
+          <button aria-label="search" className="text-brand-black/80 hover:text-brand-red transition-colors hidden sm:block">
             <SearchIcon />
           </button>
           <button aria-label="cart" className="relative text-brand-black/80 hover:text-brand-red transition-colors">
@@ -114,7 +116,48 @@ export default function Header() {
               0
             </span>
           </button>
+          {/* Hamburger Menu Toggle (Mobile Only) */}
+          <button 
+            aria-label="Toggle mobile menu"
+            className="lg:hidden ml-1 text-brand-black/80 hover:text-brand-red transition-colors"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {isMobileMenuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
         </div>
+      </div>
+
+      {/* Mobile Menu Dropdown */}
+      <div 
+        className={`lg:hidden absolute top-full left-0 w-full bg-white border-b border-brand-border shadow-xl transition-all duration-300 origin-top overflow-hidden ${
+          isMobileMenuOpen ? "max-h-[500px] opacity-100 py-4" : "max-h-0 opacity-0 py-0"
+        }`}
+      >
+        <nav className="max-w-container mx-auto px-5 flex flex-col gap-4">
+          <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className={`text-base font-medium ${isHomeActive ? "text-brand-red" : "text-brand-black/90"}`}>Home</Link>
+          <Link href="/shop" onClick={() => setIsMobileMenuOpen(false)} className={`text-base font-medium ${isShopActive ? "text-brand-red" : "text-brand-black/90"}`}>Shop Now</Link>
+          <div className="pl-4 flex flex-col gap-3 border-l-2 border-brand-pink ml-2">
+            {shopDropdownItems.map((subItem) => (
+              <Link
+                key={subItem.name}
+                href={subItem.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-sm font-medium text-brand-black/70 hover:text-brand-red"
+              >
+                {subItem.name}
+              </Link>
+            ))}
+          </div>
+          <Link href="/farm-story" onClick={() => setIsMobileMenuOpen(false)} className={`text-base font-medium ${isFarmActive ? "text-brand-red" : "text-brand-black/90"}`}>Our Farm Story</Link>
+          <Link href="/about" onClick={() => setIsMobileMenuOpen(false)} className={`text-base font-medium ${isAboutActive ? "text-brand-red" : "text-brand-black/90"}`}>About us</Link>
+          <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className={`text-base font-medium ${isContactActive ? "text-brand-red" : "text-brand-black/90"}`}>Contact us</Link>
+        </nav>
       </div>
     </header>
   );

@@ -80,6 +80,7 @@ export default function AdminDashboardPage() {
     sizes: "500g, 1kg, 2kg",
     stock: 10,
     inStock: true,
+    isFeatured: false,
     image: "",
     description: "",
   });
@@ -162,6 +163,7 @@ export default function AdminDashboardPage() {
       sizes: "500g, 1kg, 2kg",
       stock: 10,
       inStock: true,
+      isFeatured: false,
       image: "https://images.unsplash.com/photo-1604503468506-a8da13d82791?q=80&w=800&auto=format&fit=crop",
       description: "",
     });
@@ -180,6 +182,7 @@ export default function AdminDashboardPage() {
       sizes: prod.sizes || "500g, 1kg, 2kg",
       stock: typeof prod.stock === "number" ? prod.stock : 10,
       inStock: prod.inStock !== false,
+      isFeatured: prod.isFeatured || false,
       image: prod.image || "",
       description: prod.description || "",
     });
@@ -586,7 +589,12 @@ export default function AdminDashboardPage() {
                             className="w-11 h-11 object-cover rounded-lg border border-[#333] bg-[#141414]"
                           />
                           <div>
-                            <div className="font-semibold text-white text-sm">{prod.name}</div>
+                            <div className="font-semibold text-white text-sm flex items-center gap-1.5">
+                              {prod.name}
+                              {prod.isFeatured && (
+                                <svg className="w-4 h-4 text-[#ED1C24]" fill="currentColor" viewBox="0 0 20 20" title="Featured Deal"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                              )}
+                            </div>
                             <div className="text-xs text-gray-500 font-mono">Sizes: {prod.sizes || "500g, 1kg"}</div>
                           </div>
                         </div>
@@ -858,17 +866,33 @@ export default function AdminDashboardPage() {
                   />
                 </div>
 
-                <div className="sm:col-span-2 flex items-center gap-3 pt-2">
-                  <input
-                    type="checkbox"
-                    id="inStockCheck"
-                    checked={productForm.inStock}
-                    onChange={(e) => setProductForm({ ...productForm, inStock: e.target.checked })}
-                    className="w-4 h-4 accent-[#ED1C24] rounded"
-                  />
-                  <label htmlFor="inStockCheck" className="text-sm font-semibold text-gray-200">
-                    Product is available in stock for ordering
-                  </label>
+                <div className="sm:col-span-2 flex flex-col sm:flex-row items-start sm:items-center gap-6 pt-2">
+                  <div className="flex items-center gap-3">
+                    <input
+                      type="checkbox"
+                      id="inStockCheck"
+                      checked={productForm.inStock}
+                      onChange={(e) => setProductForm({ ...productForm, inStock: e.target.checked })}
+                      className="w-4 h-4 accent-[#ED1C24] rounded"
+                    />
+                    <label htmlFor="inStockCheck" className="text-sm font-semibold text-gray-200">
+                      Product is available in stock
+                    </label>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <input
+                      type="checkbox"
+                      id="isFeaturedCheck"
+                      checked={productForm.isFeatured}
+                      onChange={(e) => setProductForm({ ...productForm, isFeatured: e.target.checked })}
+                      className="w-4 h-4 accent-[#ED1C24] rounded"
+                    />
+                    <label htmlFor="isFeaturedCheck" className="text-sm font-semibold text-brand-pink flex items-center gap-1.5">
+                      <svg className="w-4 h-4 text-[#ED1C24]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                      Mark as Featured Deal
+                    </label>
+                  </div>
                 </div>
               </div>
               </div>

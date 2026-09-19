@@ -88,6 +88,7 @@ export interface ProductInput {
   inStock?: boolean;
   image?: string;
   description?: string;
+  isFeatured?: boolean;
 }
 
 export const dataStore = {
@@ -151,6 +152,7 @@ export const dataStore = {
       inStock: input.inStock !== false,
       image: input.image || "https://images.unsplash.com/photo-1604503468506-a8da13d82791?q=80&w=800&auto=format&fit=crop",
       description: input.description || "",
+      isFeatured: input.isFeatured || false,
     };
 
     if (process.env.MONGODB_URI) {
