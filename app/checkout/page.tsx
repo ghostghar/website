@@ -158,13 +158,10 @@ export default function CheckoutPage() {
                       name="city"
                       value={formData.city}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-brand-red/20 transition-all appearance-none"
+                      disabled
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-100 text-gray-500 focus:outline-none transition-all appearance-none cursor-not-allowed"
                     >
-                      <option value="Karachi">Karachi</option>
-                      <option value="Lahore">Lahore</option>
-                      <option value="Islamabad">Islamabad</option>
-                      <option value="Rawalpindi">Rawalpindi</option>
-                      <option value="Other">Other</option>
+                      <option value="Karachi">Karachi (Only)</option>
                     </select>
                   </div>
 
