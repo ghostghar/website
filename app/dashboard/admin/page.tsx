@@ -657,13 +657,14 @@ export default function AdminDashboardPage() {
 
       {/* --- ADD / EDIT PRODUCT MODAL --- */}
       {isProductModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-[#1C1C1C] border border-[#2A2A2A] rounded-2xl w-full max-w-2xl overflow-hidden shadow-2xl my-8">
-            <div className="px-6 py-4 border-b border-[#2A2A2A] flex items-center justify-between">
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-[#1C1C1C] border border-[#2A2A2A] rounded-2xl w-full max-w-2xl shadow-2xl flex flex-col max-h-[90vh]">
+            <div className="px-6 py-4 border-b border-[#2A2A2A] flex items-center justify-between shrink-0">
               <h2 className="text-xl font-bold text-white">
                 {editingProductId ? "Edit Product" : "Add New Product"}
               </h2>
               <button
+                type="button"
                 onClick={() => setIsProductModalOpen(false)}
                 className="text-gray-400 hover:text-white text-xl"
               >
@@ -671,8 +672,9 @@ export default function AdminDashboardPage() {
               </button>
             </div>
 
-            <form onSubmit={handleSaveProduct} className="p-6 space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <form onSubmit={handleSaveProduct} className="flex flex-col overflow-hidden">
+              <div className="p-6 space-y-4 overflow-y-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="sm:col-span-2">
                   <label className="block text-xs font-semibold text-gray-300 uppercase mb-1">
                     Product Name *
@@ -869,8 +871,9 @@ export default function AdminDashboardPage() {
                   </label>
                 </div>
               </div>
+              </div>
 
-              <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 pt-4 border-t border-[#2A2A2A]">
+              <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 px-6 py-4 border-t border-[#2A2A2A] shrink-0">
                 <button
                   type="button"
                   onClick={() => setIsProductModalOpen(false)}
@@ -893,10 +896,11 @@ export default function AdminDashboardPage() {
       {/* --- ADD CATEGORY MODAL --- */}
       {isCategoryModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-[#1C1C1C] border border-[#2A2A2A] rounded-2xl w-full max-w-md overflow-hidden shadow-2xl">
-            <div className="px-6 py-4 border-b border-[#2A2A2A] flex items-center justify-between">
+          <div className="bg-[#1C1C1C] border border-[#2A2A2A] rounded-2xl w-full max-w-md shadow-2xl flex flex-col max-h-[90vh]">
+            <div className="px-6 py-4 border-b border-[#2A2A2A] flex items-center justify-between shrink-0">
               <h2 className="text-xl font-bold text-white">Add New Category</h2>
               <button
+                type="button"
                 onClick={() => setIsCategoryModalOpen(false)}
                 className="text-gray-400 hover:text-white text-xl"
               >
@@ -904,8 +908,9 @@ export default function AdminDashboardPage() {
               </button>
             </div>
 
-            <form onSubmit={handleCreateCategory} className="p-6 space-y-4">
-              <div>
+            <form onSubmit={handleCreateCategory} className="flex flex-col overflow-hidden">
+              <div className="p-6 space-y-4 overflow-y-auto">
+                <div>
                 <label className="block text-xs font-semibold text-gray-300 uppercase mb-1">
                   Category Name *
                 </label>
@@ -931,8 +936,9 @@ export default function AdminDashboardPage() {
                   placeholder="e.g. Fresh farm eggs delivered daily"
                 />
               </div>
+              </div>
 
-              <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 pt-4 border-t border-[#2A2A2A]">
+              <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 px-6 py-4 border-t border-[#2A2A2A] shrink-0">
                 <button
                   type="button"
                   onClick={() => setIsCategoryModalOpen(false)}
