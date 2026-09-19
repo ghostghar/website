@@ -17,8 +17,18 @@ interface CategoryPageProps {
 }
 
 export default function CategoryDetailPage({ params }: CategoryPageProps) {
+  const categoryNameMap: Record<string, string> = {
+    "chicken": "Fresh Chicken",
+    "mutton": "Mutton Meat",
+    "live-chicken": "Live Chicken",
+    "eggs": "Farm Fresh Eggs",
+    "desi-products": "Desi Products"
+  };
+
+  const defaultName = categoryNameMap[params.slug] || params.slug.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
+
   const [category, setCategory] = useState<any>({
-    name: params.slug.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()),
+    name: defaultName,
     slug: params.slug,
     desc: "Fresh organic selection at Goshtghar.",
   });
@@ -35,10 +45,14 @@ export default function CategoryDetailPage({ params }: CategoryPageProps) {
 
         if (catRes.success && Array.isArray(catRes.data)) {
           const foundCat = catRes.data.find((c: any) => c.slug === params.slug);
-          if (foundCat) setCategory(foundCat);
+          if (foundCat) {
+            setCategory({ ...foundCat, name: categoryNameMap[params.slug] || foundCat.name });
+          }
         } else {
           const foundCat = fallbackCategories.find((c) => c.slug === params.slug);
-          if (foundCat) setCategory(foundCat);
+          if (foundCat) {
+            setCategory({ ...foundCat, name: categoryNameMap[params.slug] || foundCat.name });
+          }
         }
 
         if (prodRes.success && Array.isArray(prodRes.data)) {
