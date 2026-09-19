@@ -44,9 +44,13 @@ function ShopContent() {
   const filterTabs = useMemo(() => {
     return [
       { slug: "all", name: "All Products" },
-      ...categoryList.map((c) => ({ slug: c.slug, name: c.name })),
+      { slug: "chicken", name: "Fresh Chicken" },
+      { slug: "mutton", name: "Mutton Meat" },
+      { slug: "live-chicken", name: "Live Chicken" },
+      { slug: "eggs", name: "Farm Fresh Eggs" },
+      { slug: "desi-products", name: "Desi Products" },
     ];
-  }, [categoryList]);
+  }, []);
 
   const filteredProducts = useMemo(() => {
     if (activeTab === "all") {
@@ -76,7 +80,7 @@ function ShopContent() {
           </div>
 
           {/* Category Filter Pills */}
-          <div className="flex items-center gap-2 overflow-x-auto max-w-full pb-2 md:pb-0 scrollbar-none">
+          <div className="flex items-center gap-2 overflow-x-auto max-w-full pb-2 md:pb-0 scrollbar-hide">
             {filterTabs.map((tab) => {
               const isActive = activeTab === tab.slug;
               return (

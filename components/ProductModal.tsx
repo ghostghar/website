@@ -14,15 +14,13 @@ interface ProductModalProps {
 }
 
 export default function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
-  const [selectedSize, setSelectedSize] = useState<string>("");
+  const selectedSize = "1kg";
   const [quantity, setQuantity] = useState<number>(1);
   const [addedToast, setAddedToast] = useState<boolean>(false);
   const { addToCart } = useCart();
 
   useEffect(() => {
     if (product) {
-      const sizeList = product.sizes ? product.sizes.split(", ") : ["1kg"];
-      setSelectedSize(sizeList[0] || "1kg");
       setQuantity(1);
       setAddedToast(false);
     }
@@ -46,9 +44,7 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
 
   if (!isOpen || !product) return null;
 
-  const sizeOptions = product.sizes
-    ? product.sizes.split(", ").map((s) => s.trim())
-    : ["500g", "1kg", "2kg", "5kg"];
+
 
   const features = product.features && product.features.length > 0
     ? product.features
@@ -168,31 +164,6 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
               {product.description ||
                 "100% fresh, hygienic, antibiotic-free cuts sourced directly from our farm. Vacuum sealed to retain natural taste and tenderness."}
             </p>
-
-            {/* Weight / Size Selection */}
-            <div className="mb-5">
-              <label className="block text-xs font-bold text-brand-black uppercase tracking-wider mb-2">
-                Select Weight / Portion:
-              </label>
-              <div className="flex flex-wrap gap-2">
-                {sizeOptions.map((sz) => {
-                  const isSelected = selectedSize === sz;
-                  return (
-                    <button
-                      key={sz}
-                      onClick={() => setSelectedSize(sz)}
-                      className={`px-3.5 py-1.5 text-xs font-bold rounded-lg transition-all duration-200 border ${
-                        isSelected
-                          ? "bg-brand-black text-white border-brand-black shadow-sm"
-                          : "bg-white text-brand-black/80 border-gray-200 hover:border-brand-red hover:text-brand-red"
-                      }`}
-                    >
-                      {sz}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
 
             {/* Quantity Selector */}
             <div className="mb-6">

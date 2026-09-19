@@ -49,7 +49,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
   const [relatedProducts, setRelatedProducts] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const [selectedSize, setSelectedSize] = useState<string>("1kg");
+  const selectedSize = "1kg";
   const [quantity, setQuantity] = useState<number>(1);
   const [addedToast, setAddedToast] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<"desc" | "specs" | "delivery">("desc");
@@ -63,11 +63,6 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
         if (res.success && res.data) {
           const found = res.data.find((p: any) => p.id === params.id) || res.data[0];
           setProduct(found || null);
-
-          if (found) {
-            const sizes = found.sizes ? found.sizes.split(", ").map((s: string) => s.trim()) : ["1kg"];
-            setSelectedSize(sizes[0] || "1kg");
-          }
 
           const others = res.data.filter((p: any) => p.id !== params.id).slice(0, 4);
           setRelatedProducts(others);
@@ -120,9 +115,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
     );
   }
 
-  const sizeOptions = product.sizes
-    ? product.sizes.split(", ").map((s: string) => s.trim())
-    : ["500g", "1kg", "2kg", "5kg"];
+
 
   const features = product.features || [
     "100% Organic & Halal Certified",
@@ -220,30 +213,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                     "100% fresh, hygienic, antibiotic-free cuts sourced directly from our farm. Vacuum sealed to retain natural taste and tenderness."}
                 </p>
 
-                {/* Weight / Portion Selector */}
-                <div className="mb-6">
-                  <label className="block text-xs font-bold text-brand-black uppercase tracking-wider mb-2.5">
-                    Select Weight / Portion Size:
-                  </label>
-                  <div className="flex flex-wrap gap-2.5">
-                    {sizeOptions.map((sz: string) => {
-                      const isSelected = selectedSize === sz;
-                      return (
-                        <button
-                          key={sz}
-                          onClick={() => setSelectedSize(sz)}
-                          className={`px-4 py-2.5 text-xs md:text-sm font-bold rounded-xl transition-all duration-200 border ${
-                            isSelected
-                              ? "bg-brand-black text-white border-brand-black shadow-md scale-105"
-                              : "bg-white text-brand-black border-gray-200 hover:border-brand-red hover:text-brand-red"
-                          }`}
-                        >
-                          {sz}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
+
 
                 {/* Quantity Control */}
                 <div className="mb-8">

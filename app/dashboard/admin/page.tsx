@@ -597,7 +597,7 @@ export default function AdminDashboardPage() {
                                 </span>
                               )}
                             </div>
-                            <div className="text-xs text-gray-500 font-mono">Sizes: {prod.sizes || "500g, 1kg"}</div>
+                            <div className="text-xs text-gray-500 font-mono">Weight: 1kg</div>
                           </div>
                         </div>
                       </td>

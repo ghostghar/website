@@ -70,19 +70,6 @@ export default function CategoryDetailPage({ params }: CategoryPageProps) {
 
       <section className="py-20 bg-white">
         <div className="max-w-container mx-auto px-5">
-          {/* Category Header Info */}
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="inline-block bg-brand-pink text-brand-red font-semibold text-xs px-4 py-1.5 rounded-full uppercase tracking-wider mb-3">
-              Category Collection
-            </span>
-            <h2 className="text-3xl font-bold text-brand-black mb-3">
-              {category.name} <span className="text-brand-red">Selection</span>
-            </h2>
-            <p className="text-brand-grey text-sm leading-relaxed">
-              {category.desc || "Fresh organic selection at Goshtghar."}
-            </p>
-          </div>
-
           {isLoading ? (
             <div className="py-16 text-center">
               <div className="animate-spin inline-block w-8 h-8 border-2 border-brand-red border-t-transparent rounded-full mb-3"></div>
