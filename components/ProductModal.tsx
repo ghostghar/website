@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Placeholder from "./Placeholder";
 import { StarIcon, CartIcon } from "./Icons";
+import { useCart } from "@/context/CartContext";
 import { Product } from "@/lib/data";
 
 interface ProductModalProps {
@@ -16,6 +17,7 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [quantity, setQuantity] = useState<number>(1);
   const [addedToast, setAddedToast] = useState<boolean>(false);
+  const { addToCart } = useCart();
 
   useEffect(() => {
     if (product) {
@@ -58,6 +60,20 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
       ];
 
   const handleAddToCart = () => {
+    // Determine numerical price value by parsing newPrice (e.g. "Rs 1500" -> 1500)
+    const rawPrice = parseFloat(product.newPrice.replace(/[^0-9.]/g, ""));
+    const price = isNaN(rawPrice) ? 0 : rawPrice;
+
+    addToCart({
+      id: `${product.id}-${selectedSize}`,
+      productId: product.id,
+      name: product.name,
+      price: price,
+      image: product.image || "/images/placeholder.svg",
+      size: selectedSize,
+      quantity: quantity,
+    });
+
     setAddedToast(true);
     setTimeout(() => {
       setAddedToast(false);

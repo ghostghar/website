@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SearchIcon, CartIcon } from "./Icons";
+import { useCart } from "@/context/CartContext";
 
 const shopDropdownItems = [
   { name: "All Products", href: "/shop" },
@@ -17,6 +18,9 @@ const shopDropdownItems = [
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+
+  const { cart } = useCart();
+  const totalCartItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   const isHomeActive = pathname === "/";
   const isShopActive = pathname.startsWith("/shop");
@@ -110,12 +114,14 @@ export default function Header() {
           <button aria-label="search" className="text-brand-black/80 hover:text-brand-red transition-colors hidden sm:block">
             <SearchIcon />
           </button>
-          <button aria-label="cart" className="relative text-brand-black/80 hover:text-brand-red transition-colors">
+          <Link href="/cart" aria-label="cart" className="relative text-brand-black/80 hover:text-brand-red transition-colors mt-1">
             <CartIcon />
-            <span className="absolute -top-2 -right-2 w-4 h-4 rounded-full bg-brand-red text-white text-[10px] flex items-center justify-center font-bold">
-              0
-            </span>
-          </button>
+            {totalCartItems > 0 && (
+              <span className="absolute -top-2.5 -right-2.5 w-[18px] h-[18px] rounded-full bg-brand-red text-white text-[10px] flex items-center justify-center font-bold">
+                {totalCartItems}
+              </span>
+            )}
+          </Link>
           {/* Hamburger Menu Toggle (Mobile Only) */}
           <button 
             aria-label="Toggle mobile menu"

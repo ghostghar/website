@@ -16,9 +16,7 @@ export default function Footer() {
       <div className="max-w-container mx-auto px-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr] gap-10 pb-12">
         <div>
           <Link href="/" className="flex items-center gap-3 mb-4 w-max">
-            <div className="bg-white rounded-xl py-1.5 px-2">
-              <img src="/images/logo.png" alt="Goshtghar Logo" className="h-10 md:h-12 w-auto object-contain" />
-            </div>
+            <img src="/images/logo.png" alt="Goshtghar Logo" className="h-14 md:h-16 w-auto object-contain" />
             <span className="text-2xl font-bold text-white tracking-tight">Goshtghar</span>
           </Link>
           <p className="text-gray-400 text-sm max-w-xs mb-5">

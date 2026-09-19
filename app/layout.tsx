@@ -21,6 +21,8 @@ export const metadata: Metadata = {
   description: "Goshtghar - Fresh, premium quality halal organic meat and farm products.",
 };
 
+import { CartProvider } from "@/context/CartContext";
+
 export default function RootLayout({
   children,
 }: {
@@ -29,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${poppins.variable} ${outfit.variable}`}>
       <body className="font-sans bg-white text-brand-black antialiased">
-        {children}
+        <CartProvider>{children}</CartProvider>
       </body>
     </html>
   );

@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import Placeholder from "@/components/Placeholder";
 import { fetchProducts } from "@/lib/apiClient";
 import { StarIcon, CartIcon, ArrowIcon } from "@/components/Icons";
+import { useCart } from "@/context/CartContext";
 
 interface ProductPageProps {
   params: {
@@ -52,6 +53,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
   const [quantity, setQuantity] = useState<number>(1);
   const [addedToast, setAddedToast] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<"desc" | "specs" | "delivery">("desc");
+  const { addToCart } = useCart();
 
   useEffect(() => {
     async function loadProductData() {
@@ -130,6 +132,19 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
   ];
 
   const handleAddToCart = () => {
+    const rawPrice = parseFloat(product.newPrice.replace(/[^0-9.]/g, ""));
+    const price = isNaN(rawPrice) ? 0 : rawPrice;
+
+    addToCart({
+      id: `${product.id}-${selectedSize}`,
+      productId: product.id,
+      name: product.name,
+      price: price,
+      image: product.image || "/images/placeholder.svg",
+      size: selectedSize,
+      quantity: quantity,
+    });
+
     setAddedToast(true);
     setTimeout(() => {
       setAddedToast(false);
