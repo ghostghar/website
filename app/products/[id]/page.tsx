@@ -200,7 +200,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                 </div>
 
                 {/* Description */}
-                <p className="text-brand-black/80 text-sm md:text-base leading-relaxed mb-6">
+                <p className="text-brand-black/80 text-sm md:text-base leading-relaxed mb-6 break-words whitespace-pre-wrap">
                   {product.description ||
                     "100% fresh, hygienic, antibiotic-free cuts sourced directly from our farm. Vacuum sealed to retain natural taste and tenderness."}
                 </p>
