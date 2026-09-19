@@ -449,7 +449,7 @@ export default function AdminDashboardPage() {
         )}
 
         {/* Dashboard Overview Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
           <div className="bg-[#1C1C1C] border border-[#2A2A2A] rounded-xl p-5">
             <div className="text-gray-400 text-xs uppercase tracking-wider font-semibold">Total Products</div>
             <div className="text-3xl font-extrabold text-white mt-2">{products.length}</div>
@@ -470,21 +470,7 @@ export default function AdminDashboardPage() {
             <div className="text-xs text-gray-500 mt-1">Active product categories</div>
           </div>
 
-          <div className="bg-[#1C1C1C] border border-[#2A2A2A] rounded-xl p-5 flex flex-col justify-between">
-            <div>
-              <div className="text-gray-400 text-xs uppercase tracking-wider font-semibold">Database Engine</div>
-              <div className="text-sm font-semibold text-gray-200 mt-2 flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span>MongoDB Atlas Ready</span>
-              </div>
-            </div>
-            <button
-              onClick={handleSeedDatabase}
-              className="mt-3 text-xs bg-[#262626] hover:bg-[#333] text-gray-300 hover:text-white font-medium py-1.5 px-3 rounded-lg border border-[#3A3A3A] transition flex items-center justify-center gap-1.5"
-            >
-              <span>Seed Sample Data</span>
-            </button>
-          </div>
+
         </div>
 
         {/* Action Bar */}
