@@ -74,7 +74,7 @@ export default function ProductCard({
             </div>
           </div>
 
-          <h3 className="text-base font-bold text-brand-black leading-snug group-hover:text-brand-red transition-colors line-clamp-2 mb-2">
+          <h3 className="text-base font-bold text-brand-black leading-snug group-hover:text-brand-red transition-colors line-clamp-2 mb-2 break-words">
             {name}
           </h3>
 

@@ -173,7 +173,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
             </div>
 
             {/* Right Column: Full Details & Order Form */}
-            <div className="flex flex-col justify-between">
+            <div className="flex flex-col justify-between min-w-0">
               <div>
                 {/* Category */}
                 <div className="flex items-center gap-3 mb-3">
@@ -183,7 +183,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                 </div>
 
                 {/* Title */}
-                <h1 className="text-3xl md:text-4xl font-extrabold text-brand-black mb-4 leading-tight">
+                <h1 className="text-3xl md:text-4xl font-extrabold text-brand-black mb-4 leading-tight break-words">
                   {product.name}
                 </h1>
 

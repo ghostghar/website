@@ -15,9 +15,11 @@ export default function Footer() {
     <footer className="bg-brand-black text-gray-300 mt-16 pt-16">
       <div className="max-w-container mx-auto px-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr] gap-10 pb-12">
         <div>
-          <Link href="/" className="flex items-center gap-2 mb-4">
-            <span className="inline-block w-7 h-7 bg-brand-red rounded-[60%_60%_60%_5%] rotate-45" />
-            <span className="text-2xl font-bold text-white">Goshtghar</span>
+          <Link href="/" className="flex items-center gap-3 mb-4 w-max">
+            <div className="bg-white rounded-xl py-1.5 px-2">
+              <img src="/images/logo.png" alt="Goshtghar Logo" className="h-10 md:h-12 w-auto object-contain" />
+            </div>
+            <span className="text-2xl font-bold text-white tracking-tight">Goshtghar</span>
           </Link>
           <p className="text-gray-400 text-sm max-w-xs mb-5">
             Conveniently synergize premium collaborate &amp; structuring with

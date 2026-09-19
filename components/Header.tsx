@@ -32,7 +32,7 @@ export default function Header() {
       <div className="max-w-container mx-auto px-5 py-4 flex items-center justify-between gap-6">
         {/* Brand Logo (Left) */}
         <Link href="/" className="flex items-center gap-2 shrink-0">
-          <span className="inline-block w-7 h-7 bg-brand-red rounded-[60%_60%_60%_5%] rotate-45" />
+          <img src="/images/logo.png" alt="Goshtghar Logo" className="h-12 md:h-14 w-auto object-contain" />
           <span className="text-2xl font-bold tracking-tight text-brand-black">Goshtghar</span>
         </Link>
 

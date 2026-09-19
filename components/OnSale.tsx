@@ -69,12 +69,12 @@ export default function OnSale() {
         </Link>
 
         {/* Right Side: Product Details */}
-        <div className="flex flex-col justify-center">
+        <div className="flex flex-col justify-center min-w-0">
           <span className="text-xs font-bold text-brand-red uppercase tracking-wider bg-brand-pink/60 px-3 py-1 rounded-md inline-block w-max mb-3">
             {featuredProduct.cat}
           </span>
 
-          <h2 className="text-3xl md:text-[38px] font-bold text-brand-black mb-4 leading-tight">
+          <h2 className="text-3xl md:text-[38px] font-bold text-brand-black mb-4 leading-tight break-words">
             {featuredProduct.name}
           </h2>
 
