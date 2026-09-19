@@ -25,7 +25,7 @@ export default function CartPage() {
       `Assalam-o-Alaikum Goshtghar! I would like to quickly order from my Cart:\n\n${orderDetails}\n\nSubtotal: Rs ${subtotal}\nShipping: Rs ${shippingFee}\n*Total: Rs ${total}*\n\nMy delivery details are as follows:\n[Please provide your Name, Address, and Phone number here]`
     );
     
-    window.open(`https://wa.me/923001234567?text=${message}`, "_blank");
+    window.open(`https://wa.me/923362127054?text=${message}`, "_blank");
   };
 
   return (

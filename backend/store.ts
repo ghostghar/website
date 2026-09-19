@@ -11,14 +11,11 @@ const CATEGORIES_FILE = path.join(DATA_DIR, "categories.json");
 
 // Default Initial Seed Categories
 export const DEFAULT_CATEGORIES = [
-  { id: "cat-1", name: "Chicken", slug: "chicken", description: "Fresh farm-raised chicken cuts" },
-  { id: "cat-2", name: "Mutton", slug: "mutton", description: "Premium fresh goat & lamb meat" },
-  { id: "cat-3", name: "Beef", slug: "beef", description: "100% Halal fresh beef cuts" },
-  { id: "cat-4", name: "Fish", slug: "fish", description: "Fresh river & sea fish" },
-  { id: "cat-5", name: "Ready to Cook", slug: "ready-to-cook", description: "Marinated & pre-portioned meats" },
-  { id: "cat-6", name: "Organic Eggs", slug: "organic-eggs", description: "Farm fresh organic eggs" },
-  { id: "cat-7", name: "BBQ Spices", slug: "bbq-spices", description: "Authentic spice blends for grilling" },
-  { id: "cat-8", name: "Desi Ghee", slug: "desi-ghee", description: "Pure homemade desi ghee" },
+  { id: "cat-1", name: "Fresh Chicken", slug: "chicken", description: "Fresh farm-raised chicken cuts" },
+  { id: "cat-2", name: "Mutton Meat", slug: "mutton", description: "Premium fresh goat & lamb meat" },
+  { id: "cat-3", name: "Live Chicken", slug: "live-chicken", description: "Live chicken available on order" },
+  { id: "cat-4", name: "Farm Fresh Eggs", slug: "eggs", description: "Farm fresh organic eggs" },
+  { id: "cat-5", name: "Desi Products", slug: "desi-products", description: "Pure desi items" },
 ];
 
 export const DEFAULT_PRODUCTS: any[] = [];

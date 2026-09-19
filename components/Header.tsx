@@ -25,7 +25,7 @@ export default function Header() {
   const isHomeActive = pathname === "/";
   const isShopActive = pathname.startsWith("/shop");
   const isFarmActive = pathname === "/farm-story";
-  const isAboutActive = pathname === "/about";
+
   const isContactActive = pathname === "/contact";
 
   const activeLinkClass = "text-brand-red font-semibold relative py-1 after:content-[''] after:absolute after:-bottom-1.5 after:left-0 after:w-full after:h-[2.5px] after:bg-brand-red after:rounded-full transition-all";
@@ -87,15 +87,7 @@ export default function Header() {
               </Link>
             </li>
 
-            {/* About us */}
-            <li>
-              <Link
-                href="/about"
-                className={`text-[15px] ${isAboutActive ? activeLinkClass : inactiveLinkClass}`}
-              >
-                About us
-              </Link>
-            </li>
+
 
             {/* Contact us */}
             <li>
@@ -161,7 +153,7 @@ export default function Header() {
             ))}
           </div>
           <Link href="/farm-story" onClick={() => setIsMobileMenuOpen(false)} className={`text-base font-medium ${isFarmActive ? "text-brand-red" : "text-brand-black/90"}`}>Our Farm Story</Link>
-          <Link href="/about" onClick={() => setIsMobileMenuOpen(false)} className={`text-base font-medium ${isAboutActive ? "text-brand-red" : "text-brand-black/90"}`}>About us</Link>
+
           <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className={`text-base font-medium ${isContactActive ? "text-brand-red" : "text-brand-black/90"}`}>Contact us</Link>
         </nav>
       </div>

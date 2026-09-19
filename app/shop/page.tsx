@@ -79,25 +79,7 @@ function ShopContent() {
             </p>
           </div>
 
-          {/* Category Filter Pills */}
-          <div className="flex items-center gap-2 overflow-x-auto max-w-full pb-2 md:pb-0 scrollbar-hide">
-            {filterTabs.map((tab) => {
-              const isActive = activeTab === tab.slug;
-              return (
-                <button
-                  key={tab.slug}
-                  onClick={() => setActiveTab(tab.slug)}
-                  className={`px-4 py-2 text-xs md:text-sm font-semibold rounded-full whitespace-nowrap transition-all duration-200 ${
-                    isActive
-                      ? "bg-brand-red text-white shadow-sm"
-                      : "bg-brand-cream/80 text-brand-black/80 hover:bg-brand-pink hover:text-brand-red"
-                  }`}
-                >
-                  {tab.name}
-                </button>
-              );
-            })}
-          </div>
+
         </div>
 
         {/* Product Grid or Empty Category State */}

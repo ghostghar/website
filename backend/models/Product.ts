@@ -13,6 +13,7 @@ export interface IProduct extends Document {
   inStock: boolean;
   image?: string;
   description?: string;
+  longDescription?: string;
   isFeatured?: boolean;
 }
 
@@ -29,6 +30,7 @@ const ProductSchema = new Schema<IProduct>(
     inStock: { type: Boolean, default: true },
     image: { type: String, default: "" },
     description: { type: String, default: "" },
+    longDescription: { type: String, default: "" },
     isFeatured: { type: Boolean, default: false },
   },
   {

@@ -72,7 +72,7 @@ export default function AdminDashboardPage() {
   // Form State
   const [productForm, setProductForm] = useState({
     name: "",
-    cat: "Chicken",
+    cat: "Fresh Chicken",
     catSlug: "chicken",
     newPrice: "",
     oldPrice: "",
@@ -83,6 +83,7 @@ export default function AdminDashboardPage() {
     isFeatured: false,
     image: "",
     description: "",
+    longDescription: "",
   });
 
   const [categoryForm, setCategoryForm] = useState({
@@ -155,7 +156,7 @@ export default function AdminDashboardPage() {
     setEditingProductId(null);
     setProductForm({
       name: "",
-      cat: categories[0]?.name || "Chicken",
+      cat: categories[0]?.name || "Fresh Chicken",
       catSlug: categories[0]?.slug || "chicken",
       newPrice: "",
       oldPrice: "",
@@ -166,6 +167,7 @@ export default function AdminDashboardPage() {
       isFeatured: false,
       image: "https://images.unsplash.com/photo-1604503468506-a8da13d82791?q=80&w=800&auto=format&fit=crop",
       description: "",
+      longDescription: "",
     });
     setIsProductModalOpen(true);
   };
@@ -174,7 +176,7 @@ export default function AdminDashboardPage() {
     setEditingProductId(prod.id);
     setProductForm({
       name: prod.name || "",
-      cat: prod.cat || "Chicken",
+      cat: prod.cat || "Fresh Chicken",
       catSlug: prod.catSlug || "chicken",
       newPrice: prod.newPrice || "",
       oldPrice: prod.oldPrice || "",
@@ -185,6 +187,7 @@ export default function AdminDashboardPage() {
       isFeatured: prod.isFeatured || false,
       image: prod.image || "",
       description: prod.description || "",
+      longDescription: prod.longDescription || "",
     });
     setIsProductModalOpen(true);
   };
@@ -865,6 +868,19 @@ export default function AdminDashboardPage() {
                     onChange={(e) => setProductForm({ ...productForm, description: e.target.value })}
                     className="w-full bg-[#141414] border border-[#333] rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-[#ED1C24]"
                     placeholder="Describe cut quality, freshness guarantee..."
+                  />
+                </div>
+
+                <div className="sm:col-span-2">
+                  <label className="block text-xs font-semibold text-gray-300 uppercase mb-1">
+                    Long Description (For Details Tab)
+                  </label>
+                  <textarea
+                    rows={4}
+                    value={productForm.longDescription}
+                    onChange={(e) => setProductForm({ ...productForm, longDescription: e.target.value })}
+                    className="w-full bg-[#141414] border border-[#333] rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-[#ED1C24]"
+                    placeholder="Enter full details, farm source, or halaal info..."
                   />
                 </div>
 

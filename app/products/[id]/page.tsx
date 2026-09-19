@@ -258,7 +258,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                   </button>
 
                   <a
-                    href={`https://wa.me/?text=${whatsappMessage}`}
+                    href={`https://wa.me/923362127054?text=${whatsappMessage}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm md:text-base py-4 px-6 rounded-xl flex items-center justify-center gap-2.5 shadow-lg transition-all active:scale-95"
@@ -310,12 +310,18 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
 
             {activeTab === "desc" && (
               <div className="space-y-4 text-xs md:text-sm text-brand-black/90 leading-relaxed">
-                <p>
-                  At Goshtghar, every single cut of <strong>{product.name}</strong> is processed under strict 100% Halal guidelines. Our animals are grass-fed and naturally raised without any artificial growth hormones or antibiotics.
-                </p>
-                <p>
-                  We vacuum pack your order immediately after dressing to preserve natural moisture, tenderness, and rich flavor right up to your kitchen doorstep.
-                </p>
+                {product.longDescription ? (
+                  <p className="whitespace-pre-wrap">{product.longDescription}</p>
+                ) : (
+                  <>
+                    <p>
+                      At Goshtghar, every single cut of <strong>{product.name}</strong> is processed under strict 100% Halal guidelines. Our animals are grass-fed and naturally raised without any artificial growth hormones or antibiotics.
+                    </p>
+                    <p>
+                      We vacuum pack your order immediately after dressing to preserve natural moisture, tenderness, and rich flavor right up to your kitchen doorstep.
+                    </p>
+                  </>
+                )}
               </div>
             )}
 

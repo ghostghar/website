@@ -46,8 +46,7 @@ export default function ContactForm() {
                 </div>
                 <div>
                   <strong className="block text-brand-black text-base font-semibold mb-0.5">Phone &amp; WhatsApp</strong>
-                  <span className="text-brand-grey block">+92 (300) 123-4567</span>
-                  <span className="text-brand-grey block">+92 (321) 987-6543</span>
+                  <span className="text-brand-grey block">0336 2127054</span>
                 </div>
               </div>
 

@@ -222,7 +222,7 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
               </button>
 
               <a
-                href={`https://wa.me/?text=${whatsappMessage}`}
+                href={`https://wa.me/923362127054?text=${whatsappMessage}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs md:text-sm py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md active:scale-95"

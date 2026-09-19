@@ -37,8 +37,14 @@ export default function FarmStoryPage() {
             </div>
           </div>
 
-          <div className="relative bg-brand-cream/50 p-8 rounded-md border border-brand-border">
-            <h3 className="text-xl font-bold text-brand-black mb-4">Our Farm Commitments</h3>
+          <div className="space-y-6">
+            <img 
+              src="/images/farm.webp" 
+              alt="Goshtghar Organic Farm" 
+              className="w-full h-64 md:h-80 object-cover rounded-xl shadow-lg border-4 border-white"
+            />
+            <div className="relative bg-brand-cream/50 p-8 rounded-xl border border-brand-border">
+              <h3 className="text-xl font-bold text-brand-black mb-4">Our Farm Commitments</h3>
             <ul className="space-y-4 text-sm text-brand-black/90">
               <li className="flex items-start gap-3">
                 <span className="w-5 h-5 rounded-full bg-brand-red text-white flex items-center justify-center shrink-0 mt-0.5">
@@ -59,6 +65,7 @@ export default function FarmStoryPage() {
                 <span><strong>Strict Hygiene:</strong> Temperature-controlled fresh processing to lock in taste and nutrients.</span>
               </li>
             </ul>
+            </div>
           </div>
         </div>
       </section>

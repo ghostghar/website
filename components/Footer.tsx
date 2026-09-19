@@ -1,11 +1,10 @@
 import Link from "next/link";
-import Placeholder from "./Placeholder";
 
 const quickLinks = [
   { name: "Home", href: "/" },
   { name: "Categories", href: "/categories" },
   { name: "Shop", href: "/shop" },
-  { name: "About Us", href: "/about" },
+
   { name: "Blogs", href: "/blogs" },
   { name: "Contact", href: "/contact" },
 ];
@@ -20,14 +19,8 @@ export default function Footer() {
             <span className="text-2xl font-bold text-white tracking-tight">Goshtghar</span>
           </Link>
           <p className="text-gray-400 text-sm max-w-xs mb-5">
-            Conveniently synergize premium collaborate &amp; structuring with
-            competitive product implicate paradigms one-to-one intellectual
-            capital.
+            Goshtghar is your trusted source for premium, 100% halal, and farm-fresh meat delivered right to your doorstep in Karachi. Experience hygiene and quality like never before.
           </p>
-          <div className="flex gap-2.5">
-            <Placeholder label="Google Play" showText={false} className="w-[130px] h-10 !bg-[#2a2a2a] !border-[#444] text-gray-500 text-[10px]" />
-            <Placeholder label="App Store" showText={false} className="w-[130px] h-10 !bg-[#2a2a2a] !border-[#444] text-gray-500 text-[10px]" />
-          </div>
         </div>
 
         <div>
@@ -57,7 +50,7 @@ export default function Footer() {
           <h4 className="text-white text-base font-semibold mb-5">Customer Support</h4>
           <ul className="space-y-3 text-sm text-gray-400">
             <li><Link href="/contact" className="hover:text-white transition-colors">Order Tracking</Link></li>
-            <li><Link href="/about" className="hover:text-white transition-colors">Delivery Terms</Link></li>
+            <li><Link href="/contact" className="hover:text-white transition-colors">Delivery Terms</Link></li>
             <li><Link href="/contact" className="hover:text-white transition-colors">Help &amp; FAQ</Link></li>
             <li><Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
           </ul>

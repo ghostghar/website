@@ -76,7 +76,7 @@ export default function CheckoutPage() {
       (item) => `- ${item.quantity}x ${item.name} (${item.size}) : Rs ${item.price * item.quantity}`
     ).join("\n");
 
-    const message = encodeURIComponent(
+    const message = 
       `Assalam-o-Alaikum Goshtghar! I would like to place a new order.\n\n` +
       `*CUSTOMER DETAILS:*\n` +
       `Name: ${formData.fullName}\n` +
@@ -90,11 +90,11 @@ export default function CheckoutPage() {
       `Shipping: Rs ${shippingFee}\n` +
       `*Total Amount: Rs ${total}*\n` +
       `Payment Method: Cash on Delivery (COD)\n\n` +
-      `Please confirm my order.`
-    );
+      `Please confirm my order.`;
 
     // Redirect to WhatsApp
-    window.open(`https://wa.me/923001234567?text=${message}`, "_blank");
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/923362127054?text=${encodedMessage}`, "_blank");
   };
 
   if (cart.length === 0) return null; // Avoid rendering if empty
