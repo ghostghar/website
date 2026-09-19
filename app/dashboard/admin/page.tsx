@@ -513,7 +513,7 @@ export default function AdminDashboardPage() {
             </select>
           </div>
 
-          <div className="flex items-center gap-3 w-full md:w-auto justify-end">
+          <div className="grid grid-cols-2 sm:flex sm:flex-row items-center gap-3 w-full md:w-auto sm:justify-end">
             <button
               onClick={() => setIsCategoryModalOpen(true)}
               className="bg-[#262626] hover:bg-[#333] text-gray-200 font-semibold px-4 py-2 rounded-lg border border-[#3A3A3A] text-sm transition"
@@ -523,7 +523,7 @@ export default function AdminDashboardPage() {
 
             <button
               onClick={openAddProductModal}
-              className="bg-[#ED1C24] hover:bg-[#C8151C] text-white font-bold px-4 py-2 rounded-lg text-sm transition shadow-lg shadow-[#ED1C24]/20 flex items-center gap-1.5"
+              className="bg-[#ED1C24] hover:bg-[#C8151C] text-white font-bold px-4 py-2 rounded-lg text-sm transition shadow-lg shadow-[#ED1C24]/20 flex items-center justify-center gap-1.5"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
@@ -563,14 +563,14 @@ export default function AdminDashboardPage() {
               </div>
             </div>
           ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm text-gray-300">
+            <div className="overflow-x-auto pb-4">
+              <table className="w-full text-left text-sm text-gray-300 min-w-[800px]">
                 <thead className="bg-[#141414] text-xs uppercase tracking-wider text-gray-400 border-b border-[#2A2A2A]">
                   <tr>
                     <th className="py-3.5 px-4">Product Details</th>
-                    <th className="py-3.5 px-4">Category</th>
+                    <th className="py-3.5 px-4 hidden sm:table-cell">Category</th>
                     <th className="py-3.5 px-4">Price</th>
-                    <th className="py-3.5 px-4">Tag</th>
+                    <th className="py-3.5 px-4 hidden md:table-cell">Tag</th>
                     <th className="py-3.5 px-4">Stock</th>
                     <th className="py-3.5 px-4 text-right">Actions</th>
                   </tr>
@@ -591,7 +591,7 @@ export default function AdminDashboardPage() {
                           </div>
                         </div>
                       </td>
-                      <td className="py-3.5 px-4">
+                      <td className="py-3.5 px-4 hidden sm:table-cell">
                         <span className="bg-[#262626] text-gray-300 text-xs px-2.5 py-1 rounded-md border border-[#3A3A3A]">
                           {prod.cat}
                         </span>
@@ -602,7 +602,7 @@ export default function AdminDashboardPage() {
                           <div className="text-xs text-gray-500 line-through">Rs {prod.oldPrice}</div>
                         )}
                       </td>
-                      <td className="py-3.5 px-4">
+                      <td className="py-3.5 px-4 hidden md:table-cell">
                         {prod.tag ? (
                           <span className="bg-[#ED1C24]/10 text-[#ED1C24] border border-[#ED1C24]/20 text-[11px] font-semibold px-2 py-0.5 rounded-full">
                             {prod.tag}
@@ -870,17 +870,17 @@ export default function AdminDashboardPage() {
                 </div>
               </div>
 
-              <div className="flex justify-end gap-3 pt-4 border-t border-[#2A2A2A]">
+              <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 pt-4 border-t border-[#2A2A2A]">
                 <button
                   type="button"
                   onClick={() => setIsProductModalOpen(false)}
-                  className="bg-[#262626] hover:bg-[#333] text-gray-300 text-sm font-medium px-5 py-2.5 rounded-xl border border-[#3A3A3A] transition"
+                  className="w-full sm:w-auto bg-[#262626] hover:bg-[#333] text-gray-300 text-sm font-medium px-5 py-2.5 rounded-xl border border-[#3A3A3A] transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="bg-[#ED1C24] hover:bg-[#C8151C] text-white text-sm font-bold px-6 py-2.5 rounded-xl transition shadow-lg shadow-[#ED1C24]/20"
+                  className="w-full sm:w-auto bg-[#ED1C24] hover:bg-[#C8151C] text-white text-sm font-bold px-6 py-2.5 rounded-xl transition shadow-lg shadow-[#ED1C24]/20"
                 >
                   {editingProductId ? "Save Changes" : "Create Product"}
                 </button>
@@ -932,17 +932,17 @@ export default function AdminDashboardPage() {
                 />
               </div>
 
-              <div className="flex justify-end gap-3 pt-4 border-t border-[#2A2A2A]">
+              <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 pt-4 border-t border-[#2A2A2A]">
                 <button
                   type="button"
                   onClick={() => setIsCategoryModalOpen(false)}
-                  className="bg-[#262626] hover:bg-[#333] text-gray-300 text-sm font-medium px-4 py-2 rounded-xl border border-[#3A3A3A] transition"
+                  className="w-full sm:w-auto bg-[#262626] hover:bg-[#333] text-gray-300 text-sm font-medium px-4 py-2 rounded-xl border border-[#3A3A3A] transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="bg-[#ED1C24] hover:bg-[#C8151C] text-white text-sm font-bold px-5 py-2 rounded-xl transition"
+                  className="w-full sm:w-auto bg-[#ED1C24] hover:bg-[#C8151C] text-white text-sm font-bold px-5 py-2 rounded-xl transition"
                 >
                   Save Category
                 </button>
@@ -966,16 +966,16 @@ export default function AdminDashboardPage() {
               Are you sure you want to delete this product? This action cannot be undone.
             </p>
 
-            <div className="flex justify-center gap-3">
+            <div className="flex flex-col-reverse sm:flex-row justify-center gap-3">
               <button
                 onClick={() => setDeleteConfirmId(null)}
-                className="bg-[#262626] hover:bg-[#333] text-gray-300 text-sm font-medium px-5 py-2.5 rounded-xl border border-[#3A3A3A] transition"
+                className="w-full sm:w-auto bg-[#262626] hover:bg-[#333] text-gray-300 text-sm font-medium px-5 py-2.5 rounded-xl border border-[#3A3A3A] transition"
               >
                 Cancel
               </button>
               <button
                 onClick={() => handleDeleteProduct(deleteConfirmId)}
-                className="bg-red-600 hover:bg-red-700 text-white text-sm font-bold px-5 py-2.5 rounded-xl transition shadow-lg shadow-red-600/20"
+                className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white text-sm font-bold px-5 py-2.5 rounded-xl transition shadow-lg shadow-red-600/20"
               >
                 Yes, Delete
               </button>
