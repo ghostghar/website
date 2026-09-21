@@ -104,6 +104,7 @@ function ShopContent() {
                 features={p.features}
                 image={p.image}
                 rating={p.rating || 4.9}
+                inStock={p.inStock}
               />
             ))}
           </div>

@@ -104,6 +104,7 @@ export default function CategoryDetailPage({ params }: CategoryPageProps) {
                   desc={p.description || p.desc}
                   image={p.image}
                   rating={p.rating}
+                  inStock={p.inStock}
                 />
               ))}
             </div>

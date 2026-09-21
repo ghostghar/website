@@ -108,6 +108,7 @@ export default function Products() {
                   desc={p.description}
                   image={p.image}
                   rating={p.rating || 4.9}
+                  inStock={p.inStock}
                 />
               ))}
             </div>

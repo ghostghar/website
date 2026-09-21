@@ -17,6 +17,13 @@ export type ProductCardProps = {
   features?: string[];
   image?: string;
   rating?: number;
+  inStock?: boolean;
+};
+
+const formatPrice = (p: string | undefined) => {
+  if (!p) return "";
+  const num = parseFloat(p.toString().replace(/[^0-9.]/g, ""));
+  return isNaN(num) ? p : num.toLocaleString();
 };
 
 export default function ProductCard({
@@ -28,6 +35,7 @@ export default function ProductCard({
   tag,
   image,
   rating = 4.9,
+  inStock = true,
 }: ProductCardProps) {
   return (
     <Link
@@ -51,6 +59,14 @@ export default function ProductCard({
             View Full Product Page →
           </span>
         </div>
+
+        {!inStock && (
+          <div className="absolute inset-0 bg-white/60 flex items-center justify-center backdrop-blur-[2px]">
+            <span className="bg-brand-black text-white font-bold text-xs px-4 py-2 rounded-full shadow-lg transform -rotate-12">
+              OUT OF STOCK
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Product Info Content */}
@@ -71,22 +87,24 @@ export default function ProductCard({
         {/* Pricing & CTA */}
         <div className="pt-3 border-t border-gray-100 flex items-center justify-between gap-2">
           <div>
-            <span className="text-lg font-extrabold text-brand-red block leading-none">
-              {newPrice?.toString().toLowerCase().includes('rs') ? newPrice : `Rs ${newPrice}`}
+            <span className="text-lg font-extrabold text-brand-black block leading-none">
+              Rs {formatPrice(newPrice)}
             </span>
             {oldPrice && (
               <span className="text-xs font-medium text-gray-400 line-through">
-                {oldPrice?.toString().toLowerCase().includes('rs') ? oldPrice : `Rs ${oldPrice}`}
+                Rs {formatPrice(oldPrice)}
               </span>
             )}
           </div>
 
           <button
             type="button"
-            className="bg-brand-black group-hover:bg-brand-red text-white text-xs font-bold px-4 py-2.5 rounded-xl flex items-center gap-1.5 transition-all shadow-sm group-hover:shadow-md"
+            className={`text-white text-xs font-bold px-4 py-2.5 rounded-xl flex items-center gap-1.5 transition-all shadow-sm ${
+              inStock ? "bg-brand-black group-hover:bg-brand-red group-hover:shadow-md" : "bg-gray-400 cursor-not-allowed"
+            }`}
           >
-            <span>View Details</span>
-            <CartIcon className="w-3.5 h-3.5 text-white" />
+            <span>{inStock ? "View Details" : "Out of Stock"}</span>
+            {inStock && <CartIcon className="w-3.5 h-3.5 text-white" />}
           </button>
         </div>
       </div>

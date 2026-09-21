@@ -11,6 +11,12 @@ import { fetchProducts } from "@/lib/apiClient";
 import { StarIcon, CartIcon, ArrowIcon } from "@/components/Icons";
 import { useCart } from "@/context/CartContext";
 
+const formatPrice = (p: string | undefined) => {
+  if (!p) return "";
+  const num = parseFloat(p.toString().replace(/[^0-9.]/g, ""));
+  return isNaN(num) ? p : num.toLocaleString();
+};
+
 interface ProductPageProps {
   params: {
     id: string;
@@ -145,7 +151,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
   };
 
   const whatsappMessage = encodeURIComponent(
-    `Assalam-o-Alaikum Goshtghar! I would like to order:\n- Product: ${product.name}\n- Selected Portion: ${selectedSize}\n- Quantity: ${quantity}\n- Price: ${product.newPrice}`
+    `Assalam-o-Alaikum Goshtghar! I would like to order:\n- Product: ${product.name}\n- Selected Portion: ${selectedSize}\n- Quantity: ${quantity}\n- Price: ${formatPrice(product.newPrice)}`
   );
 
   return (
@@ -197,12 +203,12 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
 
                 {/* Pricing Banner */}
                 <div className="flex items-baseline gap-4 mb-6 pb-6 border-b border-brand-border">
-                  <span className="text-3xl md:text-4xl font-black text-brand-red">
-                    Rs {product.newPrice}
+                  <span className="text-3xl md:text-4xl font-black text-brand-black">
+                    Rs {formatPrice(product.newPrice)}
                   </span>
                   {product.oldPrice && (
                     <span className="text-lg font-medium text-gray-400 line-through">
-                      Rs {product.oldPrice}
+                      Rs {formatPrice(product.oldPrice)}
                     </span>
                   )}
                 </div>
@@ -251,10 +257,13 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <button
                     onClick={handleAddToCart}
-                    className="bg-brand-red hover:bg-brand-redDark text-white font-bold text-sm md:text-base py-4 px-6 rounded-xl flex items-center justify-center gap-2.5 shadow-lg transition-all active:scale-95"
+                    disabled={product.inStock === false}
+                    className={`text-white font-bold text-sm md:text-base py-4 px-6 rounded-xl flex items-center justify-center gap-2.5 shadow-lg transition-all ${
+                      product.inStock !== false ? "bg-brand-black hover:bg-brand-red active:scale-95" : "bg-gray-400 cursor-not-allowed"
+                    }`}
                   >
                     <CartIcon className="w-5 h-5 text-white" />
-                    <span>Add to Cart</span>
+                    <span>{product.inStock !== false ? "Add to Cart" : "Out of Stock"}</span>
                   </button>
 
                   <a
@@ -398,6 +407,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                     tag={p.tag}
                     image={p.image}
                     rating={p.rating}
+                    inStock={p.inStock}
                   />
                 ))}
               </div>

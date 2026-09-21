@@ -8,7 +8,6 @@ export interface IProduct extends Document {
   newPrice: string;
   oldPrice?: string;
   tag?: string;
-  sizes: string;
   stock: number;
   inStock: boolean;
   image?: string;
@@ -26,7 +25,6 @@ const ProductSchema = new Schema<IProduct>(
     newPrice: { type: String, required: true },
     oldPrice: { type: String, default: "" },
     tag: { type: String, default: "" },
-    sizes: { type: String, default: "500g, 1kg, 2kg" },
     stock: { type: Number, default: 10 },
     inStock: { type: Boolean, default: true },
     image: { type: String, default: "" },

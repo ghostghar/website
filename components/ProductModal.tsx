@@ -7,6 +7,12 @@ import { StarIcon, CartIcon } from "./Icons";
 import { useCart } from "@/context/CartContext";
 import { Product } from "@/lib/data";
 
+const formatPrice = (p: string | undefined) => {
+  if (!p) return "";
+  const num = parseFloat(p.toString().replace(/[^0-9.]/g, ""));
+  return isNaN(num) ? p : num.toLocaleString();
+};
+
 interface ProductModalProps {
   product: Product | null;
   isOpen: boolean;
@@ -77,7 +83,7 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
   };
 
   const whatsappMessage = encodeURIComponent(
-    `Assalam-o-Alaikum Goshtghar! I would like to order:\n- Product: ${product.name}\n- Weight/Size: ${selectedSize}\n- Quantity: ${quantity}\n- Total Price: ${product.newPrice}`
+    `Assalam-o-Alaikum Goshtghar! I would like to order:\n- Product: ${product.name}\n- Weight/Size: ${selectedSize}\n- Quantity: ${quantity}\n- Total Price: ${formatPrice(product.newPrice)}`
   );
 
   return (
@@ -118,9 +124,18 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
             )}
           </div>
 
-          <div className="mt-4 flex items-center gap-2 text-xs font-semibold text-brand-grey bg-white/80 px-3 py-1.5 rounded-full border border-gray-100">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            In Stock & Freshly Prepared Daily
+          <div className={`mt-4 flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full border ${product.inStock !== false ? "text-brand-grey bg-white/80 border-gray-100" : "text-brand-red bg-brand-pink/50 border-brand-red/20"}`}>
+            {product.inStock !== false ? (
+              <>
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                In Stock & Freshly Prepared Daily
+              </>
+            ) : (
+              <>
+                <span className="w-2 h-2 rounded-full bg-brand-red"></span>
+                Currently Out of Stock
+              </>
+            )}
           </div>
         </div>
 
@@ -146,10 +161,10 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
 
             {/* Price & Savings */}
             <div className="flex items-baseline gap-3 mb-4 pb-4 border-b border-brand-border">
-              <span className="text-2xl font-extrabold text-brand-red">{product.newPrice}</span>
+              <span className="text-2xl font-extrabold text-brand-black">Rs {formatPrice(product.newPrice)}</span>
               {product.oldPrice && (
                 <span className="text-sm font-medium text-gray-400 line-through">
-                  {product.oldPrice}
+                  Rs {formatPrice(product.oldPrice)}
                 </span>
               )}
               {product.oldPrice && (
@@ -215,10 +230,13 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <button
                 onClick={handleAddToCart}
-                className="w-full bg-brand-red hover:bg-brand-redDark text-white font-bold text-xs md:text-sm py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md active:scale-95"
+                disabled={product.inStock === false}
+                className={`text-white font-bold text-xs md:text-sm py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md ${
+                  product.inStock !== false ? "bg-brand-black hover:bg-brand-red active:scale-95" : "bg-gray-400 cursor-not-allowed"
+                }`}
               >
                 <CartIcon className="w-4 h-4 text-white" />
-                <span>Add to Cart</span>
+                <span>{product.inStock !== false ? "Add to Cart" : "Out of Stock"}</span>
               </button>
 
               <a
