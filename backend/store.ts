@@ -85,6 +85,7 @@ export interface ProductInput {
   inStock?: boolean;
   image?: string;
   description?: string;
+  longDescription?: string;
   isFeatured?: boolean;
   isTopPick?: boolean;
 }
@@ -149,12 +150,13 @@ export const dataStore = {
       newPrice: input.newPrice,
       oldPrice: input.oldPrice || "",
       tag: input.tag || "Fresh",
-      sizes: input.sizes || "500g, 1kg, 2kg",
       stock: typeof input.stock === "number" ? input.stock : 10,
       inStock: input.inStock !== false,
       image: input.image || "https://images.unsplash.com/photo-1604503468506-a8da13d82791?q=80&w=800&auto=format&fit=crop",
       description: input.description || "",
+      longDescription: input.longDescription || "",
       isFeatured: input.isFeatured || false,
+      isTopPick: input.isTopPick || false,
     };
 
     if (process.env.MONGODB_URI) {
