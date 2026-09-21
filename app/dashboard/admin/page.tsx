@@ -12,6 +12,7 @@ import {
   createCategory,
   seedDatabase,
   uploadProductImage,
+  toggleTopPick,
 } from "@/lib/apiClient";
 
 export default function AdminDashboardPage() {
@@ -231,6 +232,21 @@ export default function AdminDashboardPage() {
         loadDashboardData();
       } else {
         showStatus("error", res.error || "Failed to delete product.");
+      }
+    } catch (err: any) {
+      showStatus("error", err.message || "An error occurred.");
+    }
+  };
+
+  const handleToggleTopPick = async (id: string, current: boolean) => {
+    if (!token) return;
+    try {
+      const res = await toggleTopPick(id, !current, token);
+      if (res.success) {
+        showStatus("success", !current ? "Marked as Top Pick ✓" : "Removed from Top Picks");
+        loadDashboardData();
+      } else {
+        showStatus("error", res.error || "Failed to update top pick status.");
       }
     } catch (err: any) {
       showStatus("error", err.message || "An error occurred.");
@@ -470,6 +486,17 @@ export default function AdminDashboardPage() {
             <div className="text-xs text-gray-500 mt-1">Active product categories</div>
           </div>
 
+          <div className="bg-[#1C1C1C] border border-[#2A2A2A] rounded-xl p-5 sm:col-span-2 lg:col-span-1">
+            <div className="flex items-center gap-2 text-gray-400 text-xs uppercase tracking-wider font-semibold mb-1">
+              <span>📌</span> Top Picks
+            </div>
+            <div className="text-3xl font-extrabold text-amber-400 mt-1">
+              {products.filter((p) => p.isTopPick).length}
+              <span className="text-sm text-gray-500 font-normal ml-1">/ 4</span>
+            </div>
+            <div className="text-xs text-gray-500 mt-1">Shown on homepage</div>
+          </div>
+
 
         </div>
 
@@ -564,6 +591,7 @@ export default function AdminDashboardPage() {
                     <th className="py-3.5 px-4">Price</th>
                     <th className="py-3.5 px-4 hidden md:table-cell">Tag</th>
                     <th className="py-3.5 px-4">Stock</th>
+                    <th className="py-3.5 px-4 hidden lg:table-cell text-center">Top Pick</th>
                     <th className="py-3.5 px-4 text-right">Actions</th>
                   </tr>
                 </thead>
@@ -625,6 +653,18 @@ export default function AdminDashboardPage() {
                       </td>
                       <td className="py-3.5 px-4 text-right">
                         <div className="flex items-center justify-end gap-2">
+                          {/* Top Pick Toggle */}
+                          <button
+                            onClick={() => handleToggleTopPick(prod.id, prod.isTopPick || false)}
+                            className={`p-2 rounded-lg border transition ${
+                              prod.isTopPick
+                                ? "bg-amber-500/20 border-amber-500/40 text-amber-400"
+                                : "bg-[#262626] border-[#3A3A3A] text-gray-500 hover:text-amber-400 hover:border-amber-500/30"
+                            }`}
+                            title={prod.isTopPick ? "Remove from Top Picks" : "Add to Top Picks (max 4)"}
+                          >
+                            📌
+                          </button>
                           <button
                             onClick={() => openEditProductModal(prod)}
                             className="bg-[#262626] hover:bg-[#333] text-gray-200 p-2 rounded-lg border border-[#3A3A3A] transition"

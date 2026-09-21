@@ -9,8 +9,9 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const cat = searchParams.get("cat") || undefined;
     const search = searchParams.get("search") || undefined;
+    const topPick = searchParams.get("topPick") === "true" ? true : undefined;
 
-    const products = await dataStore.getProducts(cat, search);
+    const products = await dataStore.getProducts(cat, search, topPick);
     return NextResponse.json({
       success: true,
       count: products.length,

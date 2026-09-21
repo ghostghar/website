@@ -18,6 +18,11 @@ export async function fetchProducts(cat?: string, search?: string) {
   return res.json();
 }
 
+export async function fetchTopPicks() {
+  const res = await fetch("/api/products?topPick=true", { cache: "no-store" });
+  return res.json();
+}
+
 export async function fetchCategories() {
   const res = await fetch("/api/categories", { cache: "no-store" });
   return res.json();
@@ -43,6 +48,18 @@ export async function updateProduct(id: string, productData: any, token: string)
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(productData),
+  });
+  return res.json();
+}
+
+export async function toggleTopPick(id: string, isTopPick: boolean, token: string) {
+  const res = await fetch(`/api/products/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ isTopPick }),
   });
   return res.json();
 }

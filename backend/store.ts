@@ -86,11 +86,12 @@ export interface ProductInput {
   image?: string;
   description?: string;
   isFeatured?: boolean;
+  isTopPick?: boolean;
 }
 
 export const dataStore = {
   // PRODUCTS
-  getProducts: async (catSlug?: string, search?: string) => {
+  getProducts: async (catSlug?: string, search?: string, topPick?: boolean) => {
     // Check if MONGODB_URI is explicitly set
     if (process.env.MONGODB_URI) {
       try {
@@ -99,6 +100,7 @@ export const dataStore = {
           let query: any = {};
           if (catSlug && catSlug !== "all") query.catSlug = catSlug;
           if (search) query.name = { $regex: search, $options: "i" };
+          if (topPick) query.isTopPick = true;
           const products = await ProductModel.find(query).sort({ createdAt: -1 });
           return products.map((p) => p.toJSON());
         }
@@ -115,6 +117,9 @@ export const dataStore = {
     if (search) {
       const s = search.toLowerCase();
       items = items.filter((p) => p.name.toLowerCase().includes(s) || p.cat.toLowerCase().includes(s));
+    }
+    if (topPick) {
+      items = items.filter((p) => p.isTopPick === true);
     }
     return items;
   },

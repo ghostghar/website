@@ -15,6 +15,7 @@ export interface IProduct extends Document {
   description?: string;
   longDescription?: string;
   isFeatured?: boolean;
+  isTopPick?: boolean;
 }
 
 const ProductSchema = new Schema<IProduct>(
@@ -32,6 +33,7 @@ const ProductSchema = new Schema<IProduct>(
     description: { type: String, default: "" },
     longDescription: { type: String, default: "" },
     isFeatured: { type: Boolean, default: false },
+    isTopPick: { type: Boolean, default: false },
   },
   {
     timestamps: true,

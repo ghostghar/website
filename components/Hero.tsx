@@ -1,48 +1,96 @@
-import Placeholder from "./Placeholder";
-import { ArrowIcon } from "./Icons";
+"use client";
 
 export default function Hero() {
   return (
-    <section className="relative bg-brand-pink overflow-hidden">
-      <div className="max-w-container mx-auto px-5 grid grid-cols-1 lg:grid-cols-[60px_1fr_1fr] items-center gap-8 pt-10 pb-16">
-        {/* Social rail */}
-        <div className="hidden lg:flex flex-col items-center gap-4 text-xs font-bold text-brand-black/70">
-          <a href="https://www.facebook.com/p/Gosht-Ghar-61577805696063/" target="_blank" rel="noopener noreferrer" className="hover:text-brand-red">FB</a>
-          <a href="https://www.instagram.com/gosht_ghar" target="_blank" rel="noopener noreferrer" className="hover:text-brand-red">IG</a>
-          <span
-            className="text-[11px] font-normal text-brand-grey mt-2"
-            style={{ writingMode: "vertical-rl" }}
-          >
-            Follow on
-          </span>
-        </div>
+    <section className="relative w-full overflow-hidden" style={{ minHeight: "100svh" }}>
+      {/* ── Background Video ── */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ zIndex: 0 }}
+      >
+        <source src="/10685-226624850.mp4" type="video/mp4" />
+      </video>
 
-        {/* Text */}
-        <div className="text-center lg:text-left">
-          <h4 className="text-xl font-medium mb-1 text-brand-red">100% Fresh & Organic</h4>
-          <h1 className="text-5xl md:text-6xl font-extrabold leading-[1.05] mb-5 mx-auto lg:mx-0 text-brand-black">
-            Premium Meat Delivered
-          </h1>
-          <p className="text-brand-grey max-w-sm mx-auto lg:mx-0 mb-7">
-            Experience the finest quality, farm-fresh halal meat delivered straight to your doorstep in Karachi. Healthy, hygienic, and full of flavor.
-          </p>
-          <div className="flex justify-center lg:justify-start">
-            <button className="inline-flex items-center gap-2 bg-brand-black hover:bg-black text-white font-semibold px-7 py-3.5 rounded-md transition-colors">
-              <span>Shop Now</span>
-              <ArrowIcon className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
+      {/* ── Overlay ── */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          zIndex: 1,
+          background: "rgba(0,0,0,0.58)",
+        }}
+      />
 
-        {/* Image */}
-        <div className="flex justify-center">
-          <img 
-            src="/images/banner_post-removebg-preview.png" 
-            alt="Goshtghar Fresh Meat" 
-            className="w-full max-w-[420px] lg:max-w-[500px] object-contain drop-shadow-2xl transition-transform duration-700 hover:scale-105"
-          />
+      {/* ── Cinematic vignette ── */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          zIndex: 2,
+          background:
+            "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.65) 100%)",
+        }}
+      />
+
+      {/* ── Centered Slogan ── */}
+      <div
+        className="absolute inset-0 flex flex-col items-center justify-center text-center px-4"
+        style={{ zIndex: 3 }}
+      >
+        <p
+          className="text-white/70 uppercase tracking-[0.3em] text-xs md:text-sm font-semibold mb-4"
+        >
+          Karachi&apos;s Finest
+        </p>
+        <h1
+          className="font-heading text-white font-bold leading-tight"
+          style={{ fontSize: "clamp(2rem, 5.5vw, 4.2rem)", textShadow: "0 2px 24px rgba(0,0,0,0.4)" }}
+        >
+          Fresh Meat, Pure Trust,{" "}
+          <span style={{ color: "#ED1C24" }}>Delivered Daily.</span>
+        </h1>
+      </div>
+
+      {/* ── Red accent bar at bottom ── */}
+      <div
+        className="absolute bottom-0 left-0 w-full h-1 bg-brand-red"
+        style={{ zIndex: 4 }}
+      />
+
+      {/* ── Social rail — desktop only ── */}
+      <div
+        className="hidden lg:flex flex-col items-center gap-3 absolute right-8 top-1/2 -translate-y-1/2"
+        style={{ zIndex: 4 }}
+      >
+        <a
+          href="https://www.facebook.com/p/Gosht-Ghar-61577805696063/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-9 h-9 rounded-full border border-white/25 bg-white/10 hover:bg-brand-red hover:border-brand-red backdrop-blur-sm flex items-center justify-center text-white text-xs font-bold transition-all duration-300"
+          aria-label="Facebook"
+        >
+          f
+        </a>
+        <a
+          href="https://www.instagram.com/gosht_ghar"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-9 h-9 rounded-full border border-white/25 bg-white/10 hover:bg-brand-red hover:border-brand-red backdrop-blur-sm flex items-center justify-center text-white text-xs font-bold transition-all duration-300"
+          aria-label="Instagram"
+        >
+          in
+        </a>
+        <div
+          className="text-white/40 text-[10px] tracking-widest uppercase mt-1"
+          style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
+        >
+          Follow us
         </div>
       </div>
+
+
     </section>
   );
 }
