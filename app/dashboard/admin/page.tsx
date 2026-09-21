@@ -32,18 +32,17 @@ export default function AdminDashboardPage() {
   // Cloudinary Upload State
   const [isUploadingImage, setIsUploadingImage] = useState<boolean>(false);
   const [uploadStatus, setUploadStatus] = useState<string>("");
+  const [isDragging, setIsDragging] = useState<boolean>(false);
 
   // Filters & Search
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [selectedCatFilter, setSelectedCatFilter] = useState<string>("all");
 
-  const handleImageFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file || !token) return;
 
+  const uploadFile = async (file: File) => {
+    if (!file || !token) return;
     setIsUploadingImage(true);
     setUploadStatus("Uploading to Cloudinary...");
-
     try {
       const reader = new FileReader();
       reader.readAsDataURL(file);
@@ -64,6 +63,34 @@ export default function AdminDashboardPage() {
     }
   };
 
+  const handleImageFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) uploadFile(file);
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+    const file = e.dataTransfer.files?.[0];
+    if (file && file.type.startsWith("image/")) {
+      uploadFile(file);
+    } else {
+      setUploadStatus("Please drop an image file.");
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(false);
+  };
+
   // Modals
   const [isProductModalOpen, setIsProductModalOpen] = useState<boolean>(false);
   const [editingProductId, setEditingProductId] = useState<string | null>(null);
@@ -82,6 +109,7 @@ export default function AdminDashboardPage() {
     stock: 10,
     inStock: true,
     isFeatured: false,
+    isTopPick: false,
     image: "",
     description: "",
     longDescription: "",
@@ -166,6 +194,7 @@ export default function AdminDashboardPage() {
       stock: 10,
       inStock: true,
       isFeatured: false,
+      isTopPick: false,
       image: "https://images.unsplash.com/photo-1604503468506-a8da13d82791?q=80&w=800&auto=format&fit=crop",
       description: "",
       longDescription: "",
@@ -186,6 +215,7 @@ export default function AdminDashboardPage() {
       stock: typeof prod.stock === "number" ? prod.stock : 10,
       inStock: prod.inStock !== false,
       isFeatured: prod.isFeatured || false,
+      isTopPick: prod.isTopPick || false,
       image: prod.image || "",
       description: prod.description || "",
       longDescription: prod.longDescription || "",
@@ -819,7 +849,16 @@ export default function AdminDashboardPage() {
                   </div>
 
                   {/* Cloudinary File Upload Box */}
-                  <div className="border-2 border-dashed border-[#333] hover:border-[#ED1C24]/50 rounded-xl p-4 text-center bg-[#141414] transition">
+                  <div
+                    onDrop={handleDrop}
+                    onDragOver={handleDragOver}
+                    onDragLeave={handleDragLeave}
+                    className={`border-2 border-dashed rounded-xl p-4 text-center bg-[#141414] transition ${
+                      isDragging
+                        ? "border-[#ED1C24] bg-[#ED1C24]/5 scale-[1.01]"
+                        : "border-[#333] hover:border-[#ED1C24]/50"
+                    }`}
+                  >
                     <input
                       type="file"
                       id="cloudinaryImageInput"
@@ -838,14 +877,18 @@ export default function AdminDashboardPage() {
                         </div>
                       ) : (
                         <>
-                          <div className="w-10 h-10 rounded-full bg-[#ED1C24]/10 text-[#ED1C24] flex items-center justify-center">
+                          <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                            isDragging ? "bg-[#ED1C24]/20 text-[#ED1C24]" : "bg-[#ED1C24]/10 text-[#ED1C24]"
+                          }`}>
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                             </svg>
                           </div>
                           <div>
-                            <span className="text-sm font-semibold text-white">Click to Upload Image from Device</span>
-                            <p className="text-xs text-gray-500 mt-0.5">Automated upload to Cloudinary & auto-attached to product</p>
+                            <span className="text-sm font-semibold text-white">
+                              {isDragging ? "Drop image here" : "Click or Drag & Drop to Upload"}
+                            </span>
+                            <p className="text-xs text-gray-500 mt-0.5">Automated upload to Cloudinary &amp; auto-attached to product</p>
                           </div>
                         </>
                       )}
