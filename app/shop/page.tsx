@@ -89,7 +89,7 @@ function ShopContent() {
             <div className="text-brand-grey text-sm">Loading fresh cuts from Goshtghar...</div>
           </div>
         ) : filteredProducts.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
             {filteredProducts.map((p, i) => (
               <ProductCard
                 key={p.id || i}

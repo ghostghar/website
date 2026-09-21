@@ -43,7 +43,7 @@ export default function ProductCard({
       className="group bg-white rounded-2xl border border-brand-border overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
     >
       {/* Product Image Area */}
-      <div className="relative w-full h-52 overflow-hidden">
+      <div className="relative w-full h-36 sm:h-52 overflow-hidden">
         {image ? (
           <img
             src={image}
@@ -70,15 +70,15 @@ export default function ProductCard({
       </div>
 
       {/* Product Info Content */}
-      <div className="p-5 flex flex-col justify-between flex-1">
+      <div className="p-3.5 sm:p-5 flex flex-col justify-between flex-1">
         <div>
           <div className="flex items-center justify-between mb-1.5">
-            <span className="text-xs font-bold text-brand-red uppercase tracking-wider bg-brand-pink/50 px-2 py-0.5 rounded">
+            <span className="text-[10px] sm:text-xs font-bold text-brand-red uppercase tracking-wider bg-brand-pink/50 px-2 py-0.5 rounded">
               {cat}
             </span>
           </div>
 
-          <h3 className="text-base font-bold text-brand-black leading-snug group-hover:text-brand-red transition-colors line-clamp-2 mb-2 break-words">
+          <h3 className="text-sm sm:text-base font-bold text-brand-black leading-snug group-hover:text-brand-red transition-colors line-clamp-2 mb-2 break-words">
             {name}
           </h3>
 
@@ -87,11 +87,11 @@ export default function ProductCard({
         {/* Pricing & CTA */}
         <div className="pt-3 border-t border-gray-100 flex items-center justify-between gap-2">
           <div>
-            <span className="text-lg font-extrabold text-brand-black block leading-none">
+            <span className="text-base sm:text-lg font-extrabold text-brand-black block leading-none">
               Rs {formatPrice(newPrice)}
             </span>
             {oldPrice && (
-              <span className="text-xs font-medium text-gray-400 line-through">
+              <span className="text-[10px] sm:text-xs font-medium text-gray-400 line-through">
                 Rs {formatPrice(oldPrice)}
               </span>
             )}
@@ -99,11 +99,12 @@ export default function ProductCard({
 
           <button
             type="button"
-            className={`text-white text-xs font-bold px-4 py-2.5 rounded-xl flex items-center gap-1.5 transition-all shadow-sm ${
+            className={`text-white text-[10px] sm:text-xs font-bold px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl flex items-center justify-center sm:justify-start gap-1.5 transition-all shadow-sm ${
               inStock ? "bg-brand-black group-hover:bg-brand-red group-hover:shadow-md" : "bg-gray-400 cursor-not-allowed"
             }`}
           >
-            <span>{inStock ? "View Details" : "Out of Stock"}</span>
+            <span className="hidden sm:inline">{inStock ? "View Details" : "Out of Stock"}</span>
+            <span className="sm:hidden">{inStock ? "View" : "N/A"}</span>
             {inStock && <CartIcon className="w-3.5 h-3.5 text-white" />}
           </button>
         </div>

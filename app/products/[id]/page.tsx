@@ -63,7 +63,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
   
   const [zoomStyle, setZoomStyle] = useState<React.CSSProperties>({
     transformOrigin: "center center",
-    transform: "scale(1)",
+    transform: "scale(1.3)",
   });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -79,7 +79,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
   const handleMouseLeave = () => {
     setZoomStyle({
       transformOrigin: "center center",
-      transform: "scale(1)",
+      transform: "scale(1.3)",
     });
   };
 
@@ -421,7 +421,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                 </Link>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
                 {relatedProducts.map((p: any) => (
                   <ProductCard
                     key={p.id}

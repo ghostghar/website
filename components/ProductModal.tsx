@@ -27,7 +27,7 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
 
   const [zoomStyle, setZoomStyle] = useState<React.CSSProperties>({
     transformOrigin: "center center",
-    transform: "scale(1)",
+    transform: "scale(1.3)",
   });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -43,7 +43,7 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
   const handleMouseLeave = () => {
     setZoomStyle({
       transformOrigin: "center center",
-      transform: "scale(1)",
+      transform: "scale(1.3)",
     });
   };
 

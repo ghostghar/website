@@ -94,7 +94,7 @@ export default function Products() {
               <div>Loading top picks...</div>
             </div>
           ) : topPicks.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
               {topPicks.map((p, i) => (
                 <ProductCard
                   key={p.id || i}
