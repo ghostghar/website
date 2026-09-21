@@ -5,6 +5,12 @@ import Link from "next/link";
 import Placeholder from "./Placeholder";
 import { fetchProducts } from "@/lib/apiClient";
 
+const formatPrice = (p: string | undefined) => {
+  if (!p) return "";
+  const num = parseFloat(p.toString().replace(/[^0-9.]/g, ""));
+  return isNaN(num) ? p : num.toLocaleString();
+};
+
 export default function OnSale() {
   const [featuredProduct, setFeaturedProduct] = useState<any | null>(null);
 
@@ -42,7 +48,7 @@ export default function OnSale() {
         {/* Left Side: Product Image Box */}
         <Link
           href={`/products/${featuredProduct.id}`}
-          className="bg-[#f7f7f7] rounded-2xl min-h-[380px] md:min-h-[440px] flex items-center justify-center p-8 border border-brand-border cursor-pointer group relative overflow-hidden"
+          className="bg-white rounded-2xl min-h-[380px] md:min-h-[440px] flex items-center justify-center p-8 border border-brand-border cursor-pointer group relative overflow-hidden shadow-sm"
         >
           <span className="absolute top-5 left-5 bg-brand-red text-white text-xs font-bold px-3.5 py-1.5 rounded-full z-10 shadow-sm">
             Featured Deal
@@ -84,12 +90,12 @@ export default function OnSale() {
 
           <div className="flex items-center gap-6">
             <div>
-              <span className="text-2xl font-extrabold text-brand-red">
-                Rs {featuredProduct.newPrice}
+              <span className="text-2xl font-extrabold text-brand-black">
+                Rs {formatPrice(featuredProduct.newPrice)}
               </span>
               {featuredProduct.oldPrice && (
                 <span className="block text-xs text-gray-400 line-through font-medium">
-                  Rs {featuredProduct.oldPrice}
+                  Rs {formatPrice(featuredProduct.oldPrice)}
                 </span>
               )}
             </div>

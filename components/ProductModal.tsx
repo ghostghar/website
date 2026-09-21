@@ -25,6 +25,28 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
   const [addedToast, setAddedToast] = useState<boolean>(false);
   const { addToCart } = useCart();
 
+  const [zoomStyle, setZoomStyle] = useState<React.CSSProperties>({
+    transformOrigin: "center center",
+    transform: "scale(1)",
+  });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - left) / width) * 100;
+    const y = ((e.clientY - top) / height) * 100;
+    setZoomStyle({
+      transformOrigin: `${x}% ${y}%`,
+      transform: "scale(2.2)", // Zoom level
+    });
+  };
+
+  const handleMouseLeave = () => {
+    setZoomStyle({
+      transformOrigin: "center center",
+      transform: "scale(1)",
+    });
+  };
+
   useEffect(() => {
     if (product) {
       setQuantity(1);
@@ -112,12 +134,17 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
             </span>
           )}
           
-          <div className="w-full h-full min-h-[220px] flex items-center justify-center relative group">
+          <div 
+            className="w-full h-full min-h-[220px] flex items-center justify-center relative overflow-hidden cursor-crosshair rounded-lg"
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+          >
             {product.image ? (
               <img
                 src={product.image}
                 alt={product.name}
-                className="max-h-[300px] w-auto object-contain rounded-lg shadow-sm transition-transform duration-300 group-hover:scale-105"
+                style={zoomStyle}
+                className="max-h-[300px] w-auto object-contain transition-transform duration-100 ease-out"
               />
             ) : (
               <Placeholder label={product.name} className="w-full h-full min-h-[220px] rounded-lg" />

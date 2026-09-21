@@ -60,6 +60,28 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
   const [addedToast, setAddedToast] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<"desc" | "specs" | "delivery">("desc");
   const { addToCart } = useCart();
+  
+  const [zoomStyle, setZoomStyle] = useState<React.CSSProperties>({
+    transformOrigin: "center center",
+    transform: "scale(1)",
+  });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - left) / width) * 100;
+    const y = ((e.clientY - top) / height) * 100;
+    setZoomStyle({
+      transformOrigin: `${x}% ${y}%`,
+      transform: "scale(2.2)", // Zoom level
+    });
+  };
+
+  const handleMouseLeave = () => {
+    setZoomStyle({
+      transformOrigin: "center center",
+      transform: "scale(1)",
+    });
+  };
 
   useEffect(() => {
     async function loadProductData() {
@@ -171,13 +193,18 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-14 items-start mb-20">
             {/* Left Column: Product Showcase */}
             <div className="space-y-4">
-              <div className="rounded-3xl overflow-hidden flex flex-col items-center justify-center relative min-h-[420px]">
-                <div className="w-full h-full min-h-[320px] flex items-center justify-center">
+              <div className="rounded-3xl overflow-hidden flex flex-col items-center justify-center relative min-h-[420px] cursor-crosshair">
+                <div 
+                  className="w-full h-full min-h-[320px] flex items-center justify-center overflow-hidden"
+                  onMouseMove={handleMouseMove}
+                  onMouseLeave={handleMouseLeave}
+                >
                   {product.image ? (
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="max-h-[360px] w-auto object-contain transition-transform hover:scale-105 duration-300"
+                      style={zoomStyle}
+                      className="max-h-[360px] w-auto object-contain transition-transform duration-100 ease-out"
                     />
                   ) : (
                     <Placeholder label={product.name} className="w-full h-full min-h-[320px] rounded-2xl" />
