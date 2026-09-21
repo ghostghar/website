@@ -105,7 +105,6 @@ export default function AdminDashboardPage() {
     newPrice: "",
     oldPrice: "",
     tag: "Fresh Farm",
-    sizes: "500g, 1kg, 2kg",
     stock: 10,
     inStock: true,
     isFeatured: false,
@@ -190,7 +189,6 @@ export default function AdminDashboardPage() {
       newPrice: "",
       oldPrice: "",
       tag: "Fresh Farm",
-      sizes: "500g, 1kg, 2kg",
       stock: 10,
       inStock: true,
       isFeatured: false,
@@ -211,7 +209,6 @@ export default function AdminDashboardPage() {
       newPrice: prod.newPrice || "",
       oldPrice: prod.oldPrice || "",
       tag: prod.tag || "Fresh Farm",
-      sizes: prod.sizes || "500g, 1kg, 2kg",
       stock: typeof prod.stock === "number" ? prod.stock : 10,
       inStock: prod.inStock !== false,
       isFeatured: prod.isFeatured || false,
@@ -811,18 +808,6 @@ export default function AdminDashboardPage() {
                   />
                 </div>
 
-                <div>
-                  <label className="block text-xs font-semibold text-gray-300 uppercase mb-1">
-                    Weight / Portions
-                  </label>
-                  <input
-                    type="text"
-                    value={productForm.sizes}
-                    onChange={(e) => setProductForm({ ...productForm, sizes: e.target.value })}
-                    className="w-full bg-[#141414] border border-[#333] rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-[#ED1C24]"
-                    placeholder="e.g. 500g, 1kg, 2kg"
-                  />
-                </div>
 
                 <div>
                   <label className="block text-xs font-semibold text-gray-300 uppercase mb-1">

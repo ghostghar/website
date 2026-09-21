@@ -101,7 +101,6 @@ export default function CategoryDetailPage({ params }: CategoryPageProps) {
                   newPrice={p.newPrice}
                   oldPrice={p.oldPrice}
                   tag={p.tag}
-                  sizes={p.sizes}
                   desc={p.description || p.desc}
                   image={p.image}
                   rating={p.rating}

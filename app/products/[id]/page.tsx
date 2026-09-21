@@ -396,7 +396,6 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                     newPrice={p.newPrice}
                     oldPrice={p.oldPrice}
                     tag={p.tag}
-                    sizes={p.sizes}
                     image={p.image}
                     rating={p.rating}
                   />

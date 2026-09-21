@@ -100,7 +100,6 @@ function ShopContent() {
                 newPrice={p.newPrice}
                 oldPrice={p.oldPrice}
                 tag={p.tag}
-                sizes={p.sizes || "500g, 1kg, 2kg, 5kg"}
                 desc={p.description || p.desc}
                 features={p.features}
                 image={p.image}

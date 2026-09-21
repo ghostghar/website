@@ -105,7 +105,6 @@ export default function Products() {
                   newPrice={p.newPrice}
                   oldPrice={p.oldPrice}
                   tag={p.tag}
-                  sizes={p.sizes}
                   desc={p.description}
                   image={p.image}
                   rating={p.rating || 4.9}

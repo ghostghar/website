@@ -12,7 +12,6 @@ export type ProductCardProps = {
   newPrice: string;
   oldPrice?: string;
   tag?: string;
-  sizes?: string;
   desc?: string;
   description?: string;
   features?: string[];
@@ -27,7 +26,6 @@ export default function ProductCard({
   newPrice,
   oldPrice,
   tag,
-  sizes = "1kg",
   image,
   rating = 4.9,
 }: ProductCardProps) {
