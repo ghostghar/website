@@ -165,13 +165,13 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-14 items-start mb-20">
             {/* Left Column: Product Showcase */}
             <div className="space-y-4">
-              <div className="bg-[#F9F6F3] rounded-3xl p-8 border border-brand-border flex flex-col items-center justify-center relative min-h-[420px] shadow-sm">
+              <div className="rounded-3xl overflow-hidden flex flex-col items-center justify-center relative min-h-[420px]">
                 <div className="w-full h-full min-h-[320px] flex items-center justify-center">
                   {product.image ? (
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="max-h-[360px] w-auto object-contain rounded-2xl shadow-md transition-transform hover:scale-105 duration-300"
+                      className="max-h-[360px] w-auto object-contain transition-transform hover:scale-105 duration-300"
                     />
                   ) : (
                     <Placeholder label={product.name} className="w-full h-full min-h-[320px] rounded-2xl" />

@@ -35,7 +35,7 @@ export default function ProductCard({
       className="group bg-white rounded-2xl border border-brand-border overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
     >
       {/* Product Image Area */}
-      <div className="relative w-full h-52 bg-[#F9F6F3] p-4 flex items-center justify-center overflow-hidden">
+      <div className="relative w-full h-52 overflow-hidden">
         {image ? (
           <img
             src={image}
