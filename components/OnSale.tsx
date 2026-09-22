@@ -44,8 +44,24 @@ export default function OnSale() {
 
   return (
     <section className="py-20 bg-white">
-      <div className="max-w-container mx-auto px-5 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        {/* Left Side: Product Image Box */}
+      <div className="max-w-container mx-auto px-5">
+        {/* Heading */}
+        <div className="flex items-center justify-between mb-10">
+          <div>
+            <div className="flex items-center gap-2 mb-1">
+              <span className="w-1 h-5 rounded-full bg-brand-red inline-block" />
+              <span className="text-xs font-semibold tracking-widest uppercase text-brand-red">
+                Special Deal
+              </span>
+            </div>
+            <h2 className="text-2xl md:text-3xl font-bold text-brand-black">
+              Featured <span className="text-brand-red">Product</span>
+            </h2>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          {/* Left Side: Product Image Box */}
         <Link
           href={`/products/${featuredProduct.id}`}
           className="bg-white rounded-2xl min-h-[380px] md:min-h-[440px] flex items-center justify-center p-8 border border-brand-border cursor-pointer group relative overflow-hidden shadow-sm"
@@ -108,6 +124,7 @@ export default function OnSale() {
             </Link>
           </div>
         </div>
+      </div>
       </div>
     </section>
   );
