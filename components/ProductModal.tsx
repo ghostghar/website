@@ -96,6 +96,8 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
       image: product.image || "/images/placeholder.svg",
       size: selectedSize,
       quantity: quantity,
+      cat: product.cat,
+      catSlug: product.catSlug,
     });
 
     setAddedToast(true);

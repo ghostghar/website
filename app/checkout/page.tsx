@@ -27,7 +27,11 @@ export default function CheckoutPage() {
   });
 
   // Calculate totals
-  const shippingFee = subtotal > 0 ? (subtotal > 3000 ? 0 : 150) : 0;
+  const broilerKg = cart.filter(item => item.catSlug === 'chicken' || (item.cat && item.cat.toLowerCase().includes('chicken')) || item.name.toLowerCase().includes('broiler')).reduce((acc, item) => acc + item.quantity, 0);
+  const desiKg = cart.filter(item => item.catSlug === 'desi-products' || (item.cat && item.cat.toLowerCase().includes('desi')) || item.name.toLowerCase().includes('desi') || item.name.toLowerCase().includes('aseel')).reduce((acc, item) => acc + item.quantity, 0);
+  
+  const isFreeDelivery = broilerKg >= 7 || desiKg >= 3;
+  const shippingFee = subtotal > 0 ? (isFreeDelivery ? 0 : 300) : 0;
   const total = subtotal + shippingFee;
 
   // If cart is empty, redirect back to shop

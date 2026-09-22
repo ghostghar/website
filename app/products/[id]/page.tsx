@@ -164,6 +164,8 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
       image: product.image || "/images/placeholder.svg",
       size: selectedSize,
       quantity: quantity,
+      cat: product.cat,
+      catSlug: product.catSlug,
     });
 
     setAddedToast(true);

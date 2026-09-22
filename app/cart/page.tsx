@@ -11,7 +11,11 @@ import { CartIcon } from "@/components/Icons";
 export default function CartPage() {
   const { cart, updateQuantity, removeFromCart, subtotal } = useCart();
   
-  const shippingFee = subtotal > 0 ? (subtotal > 3000 ? 0 : 150) : 0;
+  const broilerKg = cart.filter(item => item.catSlug === 'chicken' || (item.cat && item.cat.toLowerCase().includes('chicken')) || item.name.toLowerCase().includes('broiler')).reduce((acc, item) => acc + item.quantity, 0);
+  const desiKg = cart.filter(item => item.catSlug === 'desi-products' || (item.cat && item.cat.toLowerCase().includes('desi')) || item.name.toLowerCase().includes('desi') || item.name.toLowerCase().includes('aseel')).reduce((acc, item) => acc + item.quantity, 0);
+  
+  const isFreeDelivery = broilerKg >= 7 || desiKg >= 3;
+  const shippingFee = subtotal > 0 ? (isFreeDelivery ? 0 : 300) : 0;
   const total = subtotal + shippingFee;
 
   const handleWhatsAppCheckout = () => {
@@ -150,9 +154,9 @@ export default function CartPage() {
                       <span className="font-bold text-lg">Total</span>
                       <span className="font-extrabold text-2xl text-brand-red">Rs {total}</span>
                     </div>
-                    {subtotal > 0 && subtotal < 3000 && (
+                    {shippingFee > 0 && (
                       <p className="text-xs text-brand-grey mt-2">
-                        Add Rs {3000 - subtotal} more to your cart for free shipping!
+                        Order 7kg+ Broiler or 3kg+ Desi/Aseel for free delivery!
                       </p>
                     )}
                   </div>
