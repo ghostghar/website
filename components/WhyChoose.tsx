@@ -13,7 +13,7 @@ export default function WhyChoose() {
       <div className="max-w-container mx-auto px-5 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div>
           <h2 className="text-3xl md:text-[34px] font-bold mb-5">
-            Why People Choose <span className="text-brand-red">Goshtghar Meat</span>
+            Why People Choose <span className="text-brand-red">Gosht Ghar Meat</span>
           </h2>
           <p className="text-brand-grey max-w-md mb-9">
             Monotonectally promote proactive technologies with high standards

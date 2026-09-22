@@ -343,7 +343,7 @@ export default function AdminDashboardPage() {
               Protected Admin Portal
             </span>
             <h1 className="text-3xl font-extrabold text-white tracking-tight">
-              Goshtghar Admin
+              Gosht Ghar Admin
             </h1>
             <p className="text-gray-400 text-sm mt-2">
               Sign in to manage products, categories & store settings
@@ -434,7 +434,7 @@ export default function AdminDashboardPage() {
               G
             </div>
             <div>
-              <span className="font-bold text-white text-lg tracking-tight">Goshtghar</span>
+              <span className="font-bold text-white text-lg tracking-tight">Gosht Ghar</span>
               <span className="ml-2 text-xs bg-[#ED1C24]/10 text-[#ED1C24] font-semibold px-2.5 py-0.5 rounded-full border border-[#ED1C24]/20">
                 Admin Console
               </span>

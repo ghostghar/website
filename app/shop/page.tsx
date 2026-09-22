@@ -86,7 +86,7 @@ function ShopContent() {
         {isLoading ? (
           <div className="py-16 text-center">
             <div className="animate-spin inline-block w-8 h-8 border-2 border-brand-red border-t-transparent rounded-full mb-3"></div>
-            <div className="text-brand-grey text-sm">Loading fresh cuts from Goshtghar...</div>
+            <div className="text-brand-grey text-sm">Loading fresh cuts from Gosht Ghar...</div>
           </div>
         ) : filteredProducts.length > 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">

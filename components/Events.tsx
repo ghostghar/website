@@ -7,7 +7,7 @@ export default function Events() {
       <div className="max-w-container mx-auto px-5">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-end mb-11">
           <h2 className="text-3xl md:text-[34px] font-bold leading-tight">
-            Goshtghar <span className="text-brand-red">Upcoming</span>
+            Gosht Ghar <span className="text-brand-red">Upcoming</span>
             <br />
             Meat &amp; Farm Events
           </h2>

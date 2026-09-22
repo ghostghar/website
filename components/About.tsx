@@ -29,13 +29,13 @@ export default function About() {
         <div className="max-w-container mx-auto px-5 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <span className="inline-block bg-brand-pink text-brand-red font-semibold text-xs px-4 py-1.5 rounded-full uppercase tracking-wider mb-4">
-              About Goshtghar
+              About Gosht Ghar
             </span>
             <h2 className="text-3xl md:text-4xl font-extrabold text-brand-black mb-6 leading-tight">
               Purity, Tradition &amp; Freshness in <span className="text-brand-red">Every Single Cut.</span>
             </h2>
             <p className="text-brand-grey text-base leading-relaxed mb-6">
-              At <strong className="text-brand-black">Goshtghar</strong>, we believe that wholesome, nutritious meals begin with pure, ethically raised meat. We were founded to bridge the gap between traditional farm freshness and modern convenient delivery.
+              At <strong className="text-brand-black">Gosht Ghar</strong>, we believe that wholesome, nutritious meals begin with pure, ethically raised meat. We were founded to bridge the gap between traditional farm freshness and modern convenient delivery.
             </p>
             <p className="text-brand-grey text-base leading-relaxed mb-8">
               From free-range poultry to fresh mutton and organic farm produce, every item is handled with uncompromised hygiene and strict quality standards.
@@ -57,7 +57,7 @@ export default function About() {
           </div>
 
           <div className="relative">
-            <Placeholder label="Goshtghar Organic Farm Image" className="aspect-[4/3] md:aspect-[5/4] rounded-xl shadow-md" />
+            <Placeholder label="Gosht Ghar Organic Farm Image" className="aspect-[4/3] md:aspect-[5/4] rounded-xl shadow-md" />
             <div className="absolute -bottom-6 -left-6 hidden sm:flex items-center gap-3 bg-brand-black text-white p-5 rounded-lg shadow-xl max-w-xs">
               <ShieldIcon className="w-8 h-8 text-brand-red shrink-0" />
               <div className="text-xs leading-snug">
@@ -74,7 +74,7 @@ export default function About() {
         <div className="max-w-container mx-auto px-5">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <span className="text-brand-red font-semibold text-xs uppercase tracking-wider block mb-2">Our Commitments</span>
-            <h2 className="text-3xl font-bold text-brand-black">Why Goshtghar Stands Apart</h2>
+            <h2 className="text-3xl font-bold text-brand-black">Why Gosht Ghar Stands Apart</h2>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

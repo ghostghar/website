@@ -8,7 +8,7 @@ export default function FarmStoryPage() {
       <Header />
       <PageHeader
         title="Our Farm Story"
-        subtitle="Discover how Goshtghar raises healthy, organic poultry & livestock with traditional ethical farming."
+        subtitle="Discover how Gosht Ghar raises healthy, organic poultry & livestock with traditional ethical farming."
         breadcrumb="Our Farm Story"
       />
       
@@ -20,7 +20,7 @@ export default function FarmStoryPage() {
               Pure, Fresh &amp; Hygienic Meat Directly From Our Organic Farms
             </h2>
             <p className="text-brand-grey text-base leading-relaxed mb-6">
-              At <strong className="text-brand-black">Goshtghar</strong>, we take pride in maintaining 100% natural, free-range environments for our poultry and livestock. Our birds and farm animals are fed clean, natural diets without harmful chemicals or growth hormones.
+              At <strong className="text-brand-black">Gosht Ghar</strong>, we take pride in maintaining 100% natural, free-range environments for our poultry and livestock. Our birds and farm animals are fed clean, natural diets without harmful chemicals or growth hormones.
             </p>
             <p className="text-brand-grey text-base leading-relaxed mb-6">
               Every step from farm care to fresh butchering follows strict hygiene standards to deliver wholesome, nutritious meat directly to your doorstep.
@@ -40,7 +40,7 @@ export default function FarmStoryPage() {
           <div className="space-y-6">
             <img 
               src="/images/farm.webp" 
-              alt="Goshtghar Organic Farm" 
+              alt="Gosht Ghar Organic Farm" 
               className="w-full h-64 md:h-80 object-cover rounded-xl shadow-lg border-4 border-white"
             />
             <div className="relative bg-brand-cream/50 p-8 rounded-xl border border-brand-border">

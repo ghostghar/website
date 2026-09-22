@@ -110,7 +110,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
         <Header />
         <div className="py-32 text-center text-brand-grey">
           <div className="animate-spin inline-block w-8 h-8 border-2 border-brand-red border-t-transparent rounded-full mb-3"></div>
-          <div className="text-sm">Loading fresh product details from Goshtghar...</div>
+          <div className="text-sm">Loading fresh product details from Gosht Ghar...</div>
         </div>
         <Footer />
       </main>
@@ -175,7 +175,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
   };
 
   const whatsappMessage = encodeURIComponent(
-    `Assalam-o-Alaikum Goshtghar! I would like to order:\n- Product: ${product.name}\n- Selected Portion: ${selectedSize}\n- Quantity: ${quantity}\n- Price: ${formatPrice(product.newPrice)}`
+    `Assalam-o-Alaikum Gosht Ghar! I would like to order:\n- Product: ${product.name}\n- Selected Portion: ${selectedSize}\n- Quantity: ${quantity}\n- Price: ${formatPrice(product.newPrice)}`
   );
 
   return (
@@ -353,7 +353,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                 ) : (
                   <>
                     <p>
-                      At Goshtghar, every single cut of <strong>{product.name}</strong> is processed under strict 100% Halal guidelines. Our animals are grass-fed and naturally raised without any artificial growth hormones or antibiotics.
+                      At Gosht Ghar, every single cut of <strong>{product.name}</strong> is processed under strict 100% Halal guidelines. Our animals are grass-fed and naturally raised without any artificial growth hormones or antibiotics.
                     </p>
                     <p>
                       We vacuum pack your order immediately after dressing to preserve natural moisture, tenderness, and rich flavor right up to your kitchen doorstep.

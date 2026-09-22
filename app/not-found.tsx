@@ -20,7 +20,7 @@ export default function NotFound() {
           href="/"
           className="bg-brand-red hover:bg-brand-redDark text-white font-bold text-sm px-8 py-3.5 rounded-xl transition-colors shadow-md"
         >
-          Return to Goshtghar Home
+          Return to Gosht Ghar Home
         </Link>
       </div>
       <Footer />

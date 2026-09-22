@@ -8,12 +8,12 @@ const testimonials = [
   {
     name: "Tariq Mahmood",
     role: "Verified Customer",
-    text: "Goshtghar se organic chicken aur mutton order kiya tha. Meat bilkul fresh aur clean tha. Packing temperature-controlled thi aur delivery fast mili. Bohot hi behtareen quality hai!",
+    text: "Gosht Ghar se organic chicken aur mutton order kiya tha. Meat bilkul fresh aur clean tha. Packing temperature-controlled thi aur delivery fast mili. Bohot hi behtareen quality hai!",
   },
   {
     name: "Sarah Ahmed",
     role: "Regular Buyer",
-    text: "Pehli baar online fresh meat order karte hue darr lag raha tha, lekin Goshtghar ne hamari expectations exceed kar dein. Truly 100% Halal, clean, and organic. Highly recommended!",
+    text: "Pehli baar online fresh meat order karte hue darr lag raha tha, lekin Gosht Ghar ne hamari expectations exceed kar dein. Truly 100% Halal, clean, and organic. Highly recommended!",
   },
 ];
 

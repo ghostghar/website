@@ -81,7 +81,7 @@ export default function CheckoutPage() {
     ).join("\n");
 
     const message = 
-      `Assalam-o-Alaikum Goshtghar! I would like to place a new order.\n\n` +
+      `Assalam-o-Alaikum Gosht Ghar! I would like to place a new order.\n\n` +
       `*CUSTOMER DETAILS:*\n` +
       `Name: ${formData.fullName}\n` +
       `WhatsApp: ${formData.phone}\n` +

@@ -107,7 +107,7 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
   };
 
   const whatsappMessage = encodeURIComponent(
-    `Assalam-o-Alaikum Goshtghar! I would like to order:\n- Product: ${product.name}\n- Weight/Size: ${selectedSize}\n- Quantity: ${quantity}\n- Total Price: ${formatPrice(product.newPrice)}`
+    `Assalam-o-Alaikum Gosht Ghar! I would like to order:\n- Product: ${product.name}\n- Weight/Size: ${selectedSize}\n- Quantity: ${quantity}\n- Total Price: ${formatPrice(product.newPrice)}`
   );
 
   return (

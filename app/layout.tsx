@@ -17,8 +17,8 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Goshtghar - Fresh Organic Meat & Poultry Firm",
-  description: "Goshtghar - Fresh, premium quality halal organic meat and farm products.",
+  title: "Gosht Ghar - Fresh Organic Meat & Poultry Firm",
+  description: "Gosht Ghar - Fresh, premium quality halal organic meat and farm products.",
 };
 
 import { CartProvider } from "@/context/CartContext";

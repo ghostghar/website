@@ -32,7 +32,7 @@ export default function ContactForm() {
               Contact Information
             </span>
             <h2 className="text-2xl md:text-3xl font-bold text-brand-black mb-4">
-              Get in Touch With <span className="text-brand-red">Goshtghar</span>
+              Get in Touch With <span className="text-brand-red">Gosht Ghar</span>
             </h2>
             <p className="text-brand-grey text-sm leading-relaxed mb-8">
               Have questions about our fresh organic meat, daily delivery slots, or custom butchery orders? Reach out to us directly through phone, email, or by filling out the form.
@@ -91,7 +91,7 @@ export default function ContactForm() {
                 </div>
                 <h4 className="text-xl font-bold text-brand-black mb-2">Thank You!</h4>
                 <p className="text-brand-grey text-sm max-w-md mx-auto mb-6">
-                  Your message has been successfully received. The Goshtghar customer support team will contact you shortly.
+                  Your message has been successfully received. The Gosht Ghar customer support team will contact you shortly.
                 </p>
                 <button
                   onClick={() => {

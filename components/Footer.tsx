@@ -15,11 +15,11 @@ export default function Footer() {
       <div className="max-w-container mx-auto px-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr] gap-10 pb-12">
         <div>
           <Link href="/" className="flex items-center gap-3 mb-4 w-max">
-            <img src="/images/logo.png" alt="Goshtghar Logo" className="h-14 md:h-16 w-auto object-contain" />
-            <span className="text-2xl font-bold text-white tracking-tight">Goshtghar</span>
+            <img src="/images/logo.png" alt="Gosht Ghar Logo" className="h-14 md:h-16 w-auto object-contain" />
+            <span className="text-2xl font-bold text-white tracking-tight">Gosht Ghar</span>
           </Link>
           <p className="text-gray-400 text-sm max-w-xs mb-5">
-            Goshtghar is your trusted source for premium, 100% halal, and farm-fresh meat delivered right to your doorstep in Karachi. Experience hygiene and quality like never before.
+            Gosht Ghar is your trusted source for premium, 100% halal, and farm-fresh meat delivered right to your doorstep in Karachi. Experience hygiene and quality like never before.
           </p>
         </div>
 
@@ -59,7 +59,7 @@ export default function Footer() {
 
       <div className="border-t border-white/10">
         <div className="max-w-container mx-auto px-5 py-5 flex flex-col sm:flex-row justify-between items-center gap-2 text-sm text-gray-400">
-          <span>© All rights reserved. Goshtghar Meat Firm</span>
+          <span>© All rights reserved. Gosht Ghar Meat Firm</span>
           <span>Terms &amp; conditions &nbsp;|&nbsp; Privacy Policy</span>
         </div>
       </div>

@@ -30,7 +30,7 @@ export default function CategoryDetailPage({ params }: CategoryPageProps) {
   const [category, setCategory] = useState<any>({
     name: defaultName,
     slug: params.slug,
-    desc: "Fresh organic selection at Goshtghar.",
+    desc: "Fresh organic selection at Gosht Ghar.",
   });
   const [categoryProducts, setCategoryProducts] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -78,7 +78,7 @@ export default function CategoryDetailPage({ params }: CategoryPageProps) {
       <Header />
       <PageHeader
         title={category.name}
-        subtitle={category.desc || "Fresh organic selection at Goshtghar."}
+        subtitle={category.desc || "Fresh organic selection at Gosht Ghar."}
         breadcrumb={`Categories / ${category.name}`}
       />
 
