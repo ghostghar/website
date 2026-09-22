@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 import { ArrowIcon } from "./Icons";
 
 export default function ContactForm() {
@@ -13,13 +14,36 @@ export default function ContactForm() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [isSending, setIsSending] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.fullName.trim() || !formData.email.trim() || !formData.message.trim()) {
       return;
     }
-    setSubmitted(true);
+    
+    setIsSending(true);
+    
+    try {
+      await emailjs.send(
+        "YOUR_SERVICE_ID", // TODO: Replace with your EmailJS Service ID
+        "YOUR_TEMPLATE_ID", // TODO: Replace with your EmailJS Template ID
+        {
+          fullName: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          subject: formData.subject,
+          message: formData.message,
+        },
+        "YOUR_PUBLIC_KEY" // TODO: Replace with your EmailJS Public Key
+      );
+      setSubmitted(true);
+    } catch (error) {
+      console.error("Failed to send email:", error);
+      alert("Failed to send message. Please try again later.");
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -187,10 +211,11 @@ export default function ContactForm() {
 
                 <button
                   type="submit"
-                  className="w-full inline-flex items-center justify-center gap-2 bg-brand-red hover:bg-brand-redDark text-white text-sm font-semibold px-8 py-4 rounded-md transition-colors shadow-sm"
+                  disabled={isSending}
+                  className={`w-full inline-flex items-center justify-center gap-2 bg-brand-red hover:bg-brand-redDark text-white text-sm font-semibold px-8 py-4 rounded-md transition-colors shadow-sm ${isSending ? "opacity-75 cursor-not-allowed" : ""}`}
                 >
-                  <span>Send Message</span>
-                  <ArrowIcon className="w-4 h-4" />
+                  <span>{isSending ? "Sending..." : "Send Message"}</span>
+                  {!isSending && <ArrowIcon className="w-4 h-4" />}
                 </button>
               </form>
             )}

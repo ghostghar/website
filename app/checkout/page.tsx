@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
 import { useCart } from "@/context/CartContext";
 import Link from "next/link";
+import emailjs from "@emailjs/browser";
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -25,6 +26,8 @@ export default function CheckoutPage() {
     phone: "",
     address: "",
   });
+
+  const [isProcessing, setIsProcessing] = useState(false);
 
   // Calculate totals
   const broilerKg = cart.filter(item => item.catSlug === 'chicken' || (item.cat && item.cat.toLowerCase().includes('chicken')) || item.name.toLowerCase().includes('broiler')).reduce((acc, item) => acc + item.quantity, 0);
@@ -71,9 +74,11 @@ export default function CheckoutPage() {
     return isValid;
   };
 
-  const handlePlaceOrder = (e: FormEvent) => {
+  const handlePlaceOrder = async (e: FormEvent) => {
     e.preventDefault();
     if (!validateForm()) return;
+
+    setIsProcessing(true);
 
     // Build the order summary
     const orderItems = cart.map(
@@ -95,6 +100,31 @@ export default function CheckoutPage() {
       `*Total Amount: Rs ${total}*\n` +
       `Payment Method: Cash on Delivery (COD)\n\n` +
       `Please confirm my order.`;
+
+    try {
+      // Send email notification to admin via EmailJS
+      await emailjs.send(
+        "YOUR_SERVICE_ID", // TODO: Replace with your EmailJS Service ID
+        "YOUR_ORDER_TEMPLATE_ID", // TODO: Replace with your EmailJS Template ID for Orders
+        {
+          customer_name: formData.fullName,
+          customer_phone: formData.phone,
+          customer_city: formData.city,
+          customer_address: formData.address,
+          customer_instructions: formData.instructions || "None",
+          order_summary: orderItems,
+          order_subtotal: subtotal,
+          order_shipping: shippingFee,
+          order_total: total,
+        },
+        "YOUR_PUBLIC_KEY" // TODO: Replace with your EmailJS Public Key
+      );
+    } catch (error) {
+      console.error("Failed to send order email notification:", error);
+      // Proceed to WhatsApp even if email notification fails
+    } finally {
+      setIsProcessing(false);
+    }
 
     // Redirect to WhatsApp
     const encodedMessage = encodeURIComponent(message);
@@ -263,12 +293,15 @@ export default function CheckoutPage() {
                 
                 <button 
                   type="submit"
-                  className="w-full bg-brand-red hover:bg-brand-redDark text-white font-bold py-4 rounded-xl transition-colors shadow-md flex items-center justify-center gap-2"
+                  disabled={isProcessing}
+                  className={`w-full bg-brand-red hover:bg-brand-redDark text-white font-bold py-4 rounded-xl transition-colors shadow-md flex items-center justify-center gap-2 ${isProcessing ? "opacity-75 cursor-not-allowed" : ""}`}
                 >
-                  <span>Place Order via WhatsApp</span>
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
+                  <span>{isProcessing ? "Processing Order..." : "Place Order via WhatsApp"}</span>
+                  {!isProcessing && (
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  )}
                 </button>
                 
                 <div className="mt-4 text-center">

@@ -22,6 +22,7 @@ export const metadata: Metadata = {
 };
 
 import { CartProvider } from "@/context/CartContext";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 export default function RootLayout({
   children,
@@ -32,6 +33,7 @@ export default function RootLayout({
     <html lang="en" className={`${poppins.variable} ${outfit.variable}`}>
       <body className="font-sans bg-white text-brand-black antialiased">
         <CartProvider>{children}</CartProvider>
+        <WhatsAppButton />
       </body>
     </html>
   );
