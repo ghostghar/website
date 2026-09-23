@@ -13,6 +13,7 @@ import { CartIcon } from "@/components/Icons";
 function ShopContent() {
   const searchParams = useSearchParams();
   const initialCat = searchParams.get("cat") || "all";
+  const searchQuery = searchParams.get("q") || "";
 
   const [activeTab, setActiveTab] = useState<string>(initialCat);
   const [productList, setProductList] = useState<any[]>([]);
@@ -53,15 +54,29 @@ function ShopContent() {
   }, []);
 
   const filteredProducts = useMemo(() => {
-    if (activeTab === "all") {
-      return productList;
+    let list = productList;
+    
+    if (activeTab !== "all") {
+      list = list.filter(
+        (p) =>
+          p.catSlug === activeTab ||
+          p.cat.toLowerCase().includes(activeTab.toLowerCase().replace("-", " "))
+      );
     }
-    return productList.filter(
-      (p) =>
-        p.catSlug === activeTab ||
-        p.cat.toLowerCase().includes(activeTab.toLowerCase().replace("-", " "))
-    );
-  }, [activeTab, productList]);
+
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase();
+      list = list.filter(
+        (p) => 
+          p.name.toLowerCase().includes(q) || 
+          (p.desc && p.desc.toLowerCase().includes(q)) || 
+          (p.description && p.description.toLowerCase().includes(q)) || 
+          p.cat.toLowerCase().includes(q)
+      );
+    }
+
+    return list;
+  }, [activeTab, productList, searchQuery]);
 
   return (
     <section className="py-16 bg-white">

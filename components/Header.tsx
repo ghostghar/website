@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { SearchIcon, CartIcon } from "./Icons";
 import { useCart } from "@/context/CartContext";
+import { fetchProducts } from "@/lib/apiClient";
 
 const shopDropdownItems = [
   { name: "All Products", href: "/shop" },
@@ -17,7 +18,33 @@ const shopDropdownItems = [
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [products, setProducts] = useState<any[]>([]);
+  
   const pathname = usePathname();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isSearchOpen && products.length === 0) {
+      fetchProducts().then(res => {
+        if (res.success && Array.isArray(res.data)) {
+          setProducts(res.data);
+        }
+      }).catch(err => console.error("Failed to load products for search:", err));
+    }
+  }, [isSearchOpen, products.length]);
+
+  const searchResults = useMemo(() => {
+    if (!searchQuery.trim()) return [];
+    const q = searchQuery.toLowerCase();
+    return products.filter(p => 
+      p.name.toLowerCase().includes(q) || 
+      p.cat.toLowerCase().includes(q) ||
+      (p.description && p.description.toLowerCase().includes(q)) ||
+      (p.desc && p.desc.toLowerCase().includes(q))
+    ).slice(0, 5); // Top 5 results
+  }, [searchQuery, products]);
 
   const { cart } = useCart();
   const totalCartItems = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -33,7 +60,92 @@ export default function Header() {
 
   return (
     <header className="border-b border-brand-border bg-white sticky top-0 z-50">
-      <div className="max-w-container mx-auto px-5 py-4 flex items-center justify-between gap-6">
+      {/* Promotional Bar */}
+      <div className="bg-brand-red text-white py-2 overflow-hidden flex whitespace-nowrap relative z-50">
+        <div className="animate-marquee">
+          <span className="text-xs md:text-sm font-semibold tracking-wide">
+            Order 7kg+ Broiler or 3kg+ Desi/Aseel for free delivery!
+          </span>
+        </div>
+      </div>
+
+      {/* Search Bar Overlay */}
+      <div 
+        className={`absolute top-full left-0 w-full bg-white border-b border-brand-border shadow-md transition-all duration-300 origin-top overflow-hidden z-40 ${
+          isSearchOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="max-w-container mx-auto px-5 py-4">
+          <form 
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (searchQuery.trim()) {
+                router.push(`/shop?q=${encodeURIComponent(searchQuery)}`);
+                setIsSearchOpen(false);
+                setSearchQuery("");
+              }
+            }}
+            className="flex items-center gap-3 relative"
+          >
+            <input
+              type="text"
+              placeholder="Search for fresh meat, chicken, desi products..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full bg-gray-50 border border-brand-border rounded-full py-3 px-6 pr-12 text-sm focus:outline-none focus:border-brand-red focus:ring-1 focus:ring-brand-red transition-all"
+            />
+            <button type="submit" className="absolute right-4 text-brand-grey hover:text-brand-red transition-colors">
+              <SearchIcon className="w-5 h-5" />
+            </button>
+          </form>
+
+          {/* Search Results Dropdown */}
+          {searchQuery.trim().length > 0 && (
+            <div className="mt-4 border-t border-brand-border pt-2 pb-2">
+              {searchResults.length > 0 ? (
+                <div className="flex flex-col gap-1">
+                  {searchResults.map((product) => (
+                    <Link
+                      key={product.id}
+                      href={`/shop?q=${encodeURIComponent(product.name)}`}
+                      onClick={() => {
+                        setIsSearchOpen(false);
+                        setSearchQuery("");
+                      }}
+                      className="flex items-center gap-3 p-2 hover:bg-gray-50 rounded-lg transition-colors"
+                    >
+                      <div className="w-10 h-10 bg-white border border-brand-border rounded-md p-1 shrink-0">
+                        <img src={product.image} alt={product.name} className="w-full h-full object-contain" />
+                      </div>
+                      <div className="flex-col flex">
+                        <span className="text-sm font-semibold text-brand-black line-clamp-1">{product.name}</span>
+                        <span className="text-[10px] text-brand-grey uppercase tracking-wide">{product.cat}</span>
+                      </div>
+                      <div className="ml-auto text-sm font-bold text-brand-red">Rs {product.newPrice}</div>
+                    </Link>
+                  ))}
+                  <Link
+                    href={`/shop?q=${encodeURIComponent(searchQuery)}`}
+                    onClick={() => {
+                      setIsSearchOpen(false);
+                      setSearchQuery("");
+                    }}
+                    className="text-center text-xs font-semibold text-brand-red hover:underline py-3 mt-1 block"
+                  >
+                    View all results
+                  </Link>
+                </div>
+              ) : (
+                <div className="text-center text-sm text-brand-grey py-6">
+                  No products found for "{searchQuery}"
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div className="max-w-container mx-auto px-5 py-4 flex items-center justify-between gap-6 relative z-50 bg-white">
         {/* Brand Logo (Left) */}
         <Link href="/" className="flex items-center gap-2 shrink-0">
           <img src="/images/logo.png" alt="Gosht Ghar Logo" className="h-12 md:h-14 w-auto object-contain" />
@@ -103,11 +215,15 @@ export default function Header() {
 
         {/* Right Action Icons (Search & Cart only) */}
         <div className="flex items-center gap-4 lg:gap-5">
-          <button aria-label="search" className="text-brand-black/80 hover:text-brand-red transition-colors hidden sm:block">
-            <SearchIcon />
+          <button 
+            aria-label="search" 
+            onClick={() => setIsSearchOpen(!isSearchOpen)}
+            className="text-brand-black/80 hover:text-brand-red transition-colors"
+          >
+            <SearchIcon className="w-[22px] h-[22px] md:w-[26px] md:h-[26px]" />
           </button>
           <Link href="/cart" aria-label="cart" className="relative text-brand-black/80 hover:text-brand-red transition-colors mt-1">
-            <CartIcon />
+            <CartIcon className="w-[22px] h-[22px] md:w-[26px] md:h-[26px]" />
             {totalCartItems > 0 && (
               <span className="absolute -top-2.5 -right-2.5 w-[18px] h-[18px] rounded-full bg-brand-red text-white text-[10px] flex items-center justify-center font-bold">
                 {totalCartItems}
