@@ -104,8 +104,8 @@ export default function CheckoutPage() {
     try {
       // Send email notification to admin via EmailJS
       await emailjs.send(
-        "YOUR_SERVICE_ID", // TODO: Replace with your EmailJS Service ID
-        "YOUR_ORDER_TEMPLATE_ID", // TODO: Replace with your EmailJS Template ID for Orders
+        "service_g96bv4e", // Service ID
+        "template_n68c1qa", // Template ID for Orders
         {
           customer_name: formData.fullName,
           customer_phone: formData.phone,
@@ -117,7 +117,7 @@ export default function CheckoutPage() {
           order_shipping: shippingFee,
           order_total: total,
         },
-        "YOUR_PUBLIC_KEY" // TODO: Replace with your EmailJS Public Key
+        "7HJpBl34MSk11t-nJ" // Public Key
       );
     } catch (error) {
       console.error("Failed to send order email notification:", error);

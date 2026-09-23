@@ -26,8 +26,8 @@ export default function ContactForm() {
     
     try {
       await emailjs.send(
-        "YOUR_SERVICE_ID", // TODO: Replace with your EmailJS Service ID
-        "YOUR_TEMPLATE_ID", // TODO: Replace with your EmailJS Template ID
+        "service_g96bv4e", // Service ID
+        "template_sncgsnb", // Template ID
         {
           fullName: formData.fullName,
           email: formData.email,
@@ -35,7 +35,7 @@ export default function ContactForm() {
           subject: formData.subject,
           message: formData.message,
         },
-        "YOUR_PUBLIC_KEY" // TODO: Replace with your EmailJS Public Key
+        "7HJpBl34MSk11t-nJ" // Public Key
       );
       setSubmitted(true);
     } catch (error) {
