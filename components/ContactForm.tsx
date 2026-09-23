@@ -81,8 +81,7 @@ export default function ContactForm() {
                 </div>
                 <div>
                   <strong className="block text-brand-black text-base font-semibold mb-0.5">Email Address</strong>
-                  <span className="text-brand-grey block">info@goshtghar.pk</span>
-                  <span className="text-brand-grey block">support@goshtghar.pk</span>
+                  <span className="text-brand-grey block">admin@goshtghar.com</span>
                 </div>
               </div>
 
