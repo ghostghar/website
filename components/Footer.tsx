@@ -50,6 +50,7 @@ export default function Footer() {
           <ul className="space-y-3 text-sm text-gray-400">
             <li><Link href="/contact" className="hover:text-white transition-colors">Help &amp; FAQ</Link></li>
             <li><Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
+            <li><Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
           </ul>
         </div>
       </div>
@@ -57,7 +58,11 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="max-w-container mx-auto px-5 py-5 flex flex-col sm:flex-row justify-between items-center gap-2 text-sm text-gray-400">
           <span>© All rights reserved. Gosht Ghar Meat Firm</span>
-          <span>Terms &amp; conditions &nbsp;|&nbsp; Privacy Policy</span>
+          <div className="flex items-center gap-2">
+            <Link href="/privacy-policy" className="hover:text-white transition-colors hover:underline">
+              Privacy Policy
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

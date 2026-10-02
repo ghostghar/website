@@ -296,9 +296,9 @@ export default function CheckoutPage() {
                 <div className="space-y-4 mb-6 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
                   {cart.map((item) => (
                     <div key={item.id} className="flex gap-3">
-                      <div className="w-14 h-14 bg-white rounded-lg border border-brand-border flex items-center justify-center p-1.5 flex-shrink-0 relative">
+                      <div className="w-14 h-14 bg-white rounded-xl border border-brand-border flex items-center justify-center p-1.5 flex-shrink-0 relative">
                         <img src={item.image} alt={item.name} className="max-w-full max-h-full object-contain" />
-                        <span className="absolute -top-2 -right-2 bg-brand-black text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold">
+                        <span className="absolute -top-1.5 -right-1.5 bg-brand-red text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold shadow-sm border-2 border-white z-10">
                           {item.quantity}
                         </span>
                       </div>
@@ -346,12 +346,12 @@ export default function CheckoutPage() {
                     type="button"
                     onClick={() => handlePlaceOrder("whatsapp")}
                     disabled={isProcessing}
-                    className={`w-full bg-[#25D366] hover:bg-[#1DA851] text-white font-bold py-4 rounded-xl transition-colors shadow-md flex items-center justify-center gap-2 ${isProcessing ? "opacity-75 cursor-not-allowed" : ""}`}
+                    className={`w-full bg-[#25D366] hover:bg-[#20b858] text-white font-bold py-4 rounded-xl transition-all shadow-md flex items-center justify-center gap-2.5 ${isProcessing ? "opacity-75 cursor-not-allowed" : ""}`}
                   >
-                    <span>Order via WhatsApp</span>
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.666.596 1.216.784 1.39.87.174.086.275.072.376-.043.101-.115.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.029 18.88c-1.161 0-2.305-.292-3.318-.844l-3.677.964.984-3.595c-.607-1.052-.927-2.246-.926-3.468.001-3.825 3.113-6.937 6.937-6.937 3.825-.001 6.938 3.111 6.938 6.938-.001 3.827-3.114 6.942-6.938 6.942z"/>
+                    <svg className="w-5 h-5 fill-current text-white shrink-0" viewBox="0 0 24 24">
+                      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.705 1.754zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-0.999 3.648 3.742-0.981z" />
                     </svg>
+                    <span>Order via WhatsApp</span>
                   </button>
                 </div>
                 
