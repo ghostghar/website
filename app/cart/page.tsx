@@ -8,8 +8,20 @@ import PageHeader from "@/components/PageHeader";
 import { useCart } from "@/context/CartContext";
 import { CartIcon } from "@/components/Icons";
 
+import { useRouter } from "next/navigation";
+import CancelOrderModal from "@/components/CancelOrderModal";
+
 export default function CartPage() {
+  const router = useRouter();
   const { cart, updateQuantity, removeFromCart, subtotal } = useCart();
+  const [showCancelModal, setShowCancelModal] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    if (typeof window !== "undefined" && sessionStorage.getItem("went_to_checkout") === "true") {
+      setShowCancelModal(true);
+      sessionStorage.removeItem("went_to_checkout");
+    }
+  }, []);
   
   const broilerKg = cart.filter(item => item.catSlug === 'chicken' || (item.cat && item.cat.toLowerCase().includes('chicken')) || item.name.toLowerCase().includes('broiler')).reduce((acc, item) => acc + item.quantity, 0);
   const desiKg = cart.filter(item => item.catSlug === 'desi-products' || (item.cat && item.cat.toLowerCase().includes('desi')) || item.name.toLowerCase().includes('desi') || item.name.toLowerCase().includes('aseel')).reduce((acc, item) => acc + item.quantity, 0);
@@ -17,6 +29,14 @@ export default function CartPage() {
   const isFreeDelivery = broilerKg >= 7 || desiKg >= 3;
   const shippingFee = subtotal > 0 ? (isFreeDelivery ? 0 : 300) : 0;
   const total = subtotal + shippingFee;
+
+  const handleProceedToCheckout = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("went_to_checkout", "true");
+    }
+    router.push("/checkout");
+  };
 
   const handleWhatsAppCheckout = () => {
     if (cart.length === 0) return;
@@ -156,21 +176,21 @@ export default function CartPage() {
                     </div>
                     {shippingFee > 0 && (
                       <p className="text-xs text-brand-grey mt-2">
-                        Order 7kg+ Broiler or 3kg+ Desi/Aseel for free delivery!
+                        Order 7kg or more of Broiler or 3kg or more of Desi/Aseel and enjoy free delivery.
                       </p>
                     )}
                   </div>
                   
                   <div className="flex flex-col gap-3">
-                    <Link 
-                      href="/checkout"
+                    <button 
+                      onClick={handleProceedToCheckout}
                       className="w-full bg-brand-red hover:bg-brand-redDark text-white font-bold py-4 rounded-xl transition-colors shadow-md flex items-center justify-center gap-2"
                     >
                       <span>Proceed to Checkout</span>
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                       </svg>
-                    </Link>
+                    </button>
 
                     <button 
                       onClick={handleWhatsAppCheckout}
@@ -195,6 +215,14 @@ export default function CartPage() {
       </section>
       
       <Footer />
+
+      <CancelOrderModal
+        isOpen={showCancelModal}
+        onClose={() => setShowCancelModal(false)}
+        onContinueOrder={() => {
+          router.push("/checkout");
+        }}
+      />
     </main>
   );
 }

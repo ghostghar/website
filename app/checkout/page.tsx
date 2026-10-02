@@ -38,6 +38,13 @@ export default function CheckoutPage() {
   const shippingFee = subtotal > 0 ? (isFreeDelivery ? 0 : 300) : 0;
   const total = subtotal + shippingFee;
 
+  // Set flag in sessionStorage so if user returns to cart without completing order, modal triggers
+  useEffect(() => {
+    if (typeof window !== "undefined" && !orderSuccess) {
+      sessionStorage.setItem("went_to_checkout", "true");
+    }
+  }, [orderSuccess]);
+
   // If cart is empty, redirect back to shop
   useEffect(() => {
     if (cart.length === 0 && !orderSuccess) {
@@ -121,6 +128,7 @@ export default function CheckoutPage() {
       );
 
       if (method === "website") {
+        if (typeof window !== "undefined") sessionStorage.removeItem("went_to_checkout");
         clearCart();
         setOrderSuccess(true);
       }
@@ -134,6 +142,7 @@ export default function CheckoutPage() {
     }
 
     if (method === "whatsapp") {
+      if (typeof window !== "undefined") sessionStorage.removeItem("went_to_checkout");
       const encodedMessage = encodeURIComponent(message);
       window.open(`https://wa.me/923362127054?text=${encodedMessage}`, "_blank");
     }

@@ -62,9 +62,20 @@ export default function Header() {
     <header className="border-b border-brand-border bg-white sticky top-0 z-50">
       {/* Promotional Bar */}
       <div className="bg-brand-red text-white py-2 overflow-hidden flex whitespace-nowrap relative z-50">
-        <div className="animate-marquee">
-          <span className="text-xs md:text-sm font-semibold tracking-wide">
-            Order 7kg+ Broiler or 3kg+ Desi/Aseel for free delivery!
+        <div className="flex animate-marquee shrink-0 items-center whitespace-nowrap">
+          <span className="text-xs md:text-sm font-semibold tracking-wide flex items-center gap-12 px-6">
+            <span>Order 7kg or more of Broiler or 3kg or more of Desi/Aseel and enjoy free delivery.</span>
+            <span className="opacity-60">•</span>
+            <span>Order 7kg or more of Broiler or 3kg or more of Desi/Aseel and enjoy free delivery.</span>
+            <span className="opacity-60">•</span>
+          </span>
+        </div>
+        <div className="flex animate-marquee shrink-0 items-center whitespace-nowrap" aria-hidden="true">
+          <span className="text-xs md:text-sm font-semibold tracking-wide flex items-center gap-12 px-6">
+            <span>Order 7kg or more of Broiler or 3kg or more of Desi/Aseel and enjoy free delivery.</span>
+            <span className="opacity-60">•</span>
+            <span>Order 7kg or more of Broiler or 3kg or more of Desi/Aseel and enjoy free delivery.</span>
+            <span className="opacity-60">•</span>
           </span>
         </div>
       </div>
