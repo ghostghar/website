@@ -618,17 +618,10 @@ export default function AdminDashboardPage() {
             </select>
           </div>
 
-          <div className="grid grid-cols-2 sm:flex sm:flex-row items-center gap-3 w-full md:w-auto sm:justify-end">
-            <button
-              onClick={() => setIsCategoryModalOpen(true)}
-              className="bg-[#262626] hover:bg-[#333] text-gray-200 font-semibold px-4 py-2 rounded-lg border border-[#3A3A3A] text-sm transition"
-            >
-              + Add Category
-            </button>
-
+          <div className="flex items-center gap-3 w-full md:w-auto justify-end">
             <button
               onClick={openAddProductModal}
-              className="bg-[#ED1C24] hover:bg-[#C8151C] text-white font-bold px-4 py-2 rounded-lg text-sm transition shadow-lg shadow-[#ED1C24]/20 flex items-center justify-center gap-1.5"
+              className="bg-[#ED1C24] hover:bg-[#C8151C] text-white font-bold px-4 py-2 rounded-lg text-sm transition shadow-lg shadow-[#ED1C24]/20 flex items-center justify-center gap-1.5 w-full sm:w-auto"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />

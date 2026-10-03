@@ -50,6 +50,235 @@ const mockReviews = [
   },
 ];
 
+function getProductCareInfo(product: any) {
+  if (!product) {
+    return {
+      tabTitle: "Handling & Cooking Tips",
+      fallbackDesc: (
+        <p>Fresh farm-quality product delivered with utmost care.</p>
+      ),
+      tips: (
+        <div className="space-y-3 text-xs md:text-sm text-brand-black/90">
+          <p><strong>Storage:</strong> Keep refrigerated to maintain freshness.</p>
+        </div>
+      ),
+    };
+  }
+
+  const name = (product.name || "").toLowerCase();
+  const cat = (product.cat || "").toLowerCase();
+  const slug = (product.catSlug || "").toLowerCase();
+
+  // 1. Eggs (Cat / Slug / Name contains egg / anda / ande / tray)
+  const isEgg =
+    slug === "eggs" ||
+    cat.includes("egg") ||
+    cat.includes("ande") ||
+    cat.includes("anda") ||
+    name.includes("egg") ||
+    name.includes("anda") ||
+    name.includes("ande") ||
+    name.includes("tray");
+
+  if (isEgg) {
+    return {
+      tabTitle: "Storage & Freshness Tips",
+      fallbackDesc: (
+        <>
+          <p>
+            At Gosht Ghar, our <strong>{product.name}</strong> are sourced directly from healthy, free-range farm hens fed on 100% natural, vegetarian grains without any artificial growth hormones or chemicals.
+          </p>
+          <p>
+            Each egg is carefully inspected for shell integrity and freshness, securely packed in protective trays to reach your kitchen uncracked and rich in natural proteins, vitamins, and deep golden yolks.
+          </p>
+        </>
+      ),
+      tips: (
+        <div className="space-y-3 text-xs md:text-sm text-brand-black/90">
+          <p>
+            <strong>Storage:</strong> Store in a cool, dry place or in the refrigerator between 2°C to 7°C. Keep eggs pointed-end down in their carton to keep the yolk centered and fresh for up to 3–4 weeks.
+          </p>
+          <p>
+            <strong>Handling & Washing:</strong> Do not wash eggs before storing. Washing removes the egg's natural outer protective cuticle bloom that seals pores against air and bacteria. Only rinse gently with cool water right before cooking if desired.
+          </p>
+          <p>
+            <strong>Freshness Float Test:</strong> Place an egg in a bowl of cold water: super-fresh eggs lie flat at the bottom; slightly older eggs tilt upright (still good to eat); eggs that float to the surface should be discarded.
+          </p>
+          <p>
+            <strong>Recommended Uses:</strong> Perfect for morning half-fry, boiled eggs, fluffy omelettes, traditional Anda Curry, baking, or high-protein fitness diets.
+          </p>
+        </div>
+      ),
+    };
+  }
+
+  // 2. Dairy & Desi Pantry (Ghee, Butter/Makhan, Honey, Oils, Shakkar, Panjeeri)
+  const isDairyOrPantry =
+    name.includes("ghee") ||
+    name.includes("butter") ||
+    name.includes("makhan") ||
+    name.includes("honey") ||
+    name.includes("shehad") ||
+    name.includes("oil") ||
+    name.includes("tel") ||
+    name.includes("shakkar") ||
+    name.includes("gur") ||
+    name.includes("panjeeri");
+
+  if (isDairyOrPantry) {
+    return {
+      tabTitle: "Storage & Purity Guide",
+      fallbackDesc: (
+        <>
+          <p>
+            Gosht Ghar's <strong>{product.name}</strong> is 100% pure, natural, and prepared using authentic traditional methods. Guaranteed zero preservatives, synthetic colors, or chemical adulteration.
+          </p>
+          <p>
+            Packed in food-grade, airtight packaging to preserve its authentic aroma, rich golden purity, and wholesome natural nourishment.
+          </p>
+        </>
+      ),
+      tips: (
+        <div className="space-y-3 text-xs md:text-sm text-brand-black/90">
+          <p>
+            <strong>Storage:</strong> Store in a cool, dark, dry place away from direct sunlight. Seal container tightly after every use.
+          </p>
+          <p>
+            <strong>Hygiene & Purity Tip:</strong> Always use a clean, dry stainless steel spoon. Never introduce moisture or wet utensils to prevent spoiling and ensure maximum shelf life.
+          </p>
+          <p>
+            <strong>Shelf Life:</strong> Pure Desi Ghee & Honey can be stored safely at normal room temperature for up to 12 months. Fresh Desi Butter (Makhan) should be kept refrigerated below 4°C.
+          </p>
+          <p>
+            <strong>Culinary Suggestions:</strong> Ideal for crisp morning parathas, aromatic daal tadkas, traditional halwas, desserts, and daily nutritional wellness.
+          </p>
+        </div>
+      ),
+    };
+  }
+
+  // 3. Desi / Aseel Chicken (Leaner, firmer poultry requiring slow cooking)
+  const isDesiPoultry =
+    name.includes("aseel") ||
+    (name.includes("desi") && (name.includes("chicken") || name.includes("murgh") || name.includes("murgha")));
+
+  if (isDesiPoultry) {
+    return {
+      tabTitle: "Handling & Slow-Cooking Tips",
+      fallbackDesc: (
+        <>
+          <p>
+            Our authentic <strong>{product.name}</strong> comes from active, free-range desi birds raised on open fields and organic grains. Desi chicken features firmer muscle texture, lean meat, and deep, traditional aroma.
+          </p>
+          <p>
+            Processed strictly under 100% Halal Zabiha standards and vacuum sealed immediately after dressing to preserve essential nutrients and farm freshness.
+          </p>
+        </>
+      ),
+      tips: (
+        <div className="space-y-3 text-xs md:text-sm text-brand-black/90">
+          <p>
+            <strong>Storage:</strong> Keep refrigerated at 0°C to 4°C for cooking within 48 hours, or freeze at -18°C for up to 3 months.
+          </p>
+          <p>
+            <strong>Slow-Cooking Secret:</strong> Authentic Desi / Aseel chicken has firmer, active muscle fibers compared to commercial broilers. For juicy, tender meat, cook on low flame (Dum style) or pressure-cook for 15–20 minutes with bone-in cuts.
+          </p>
+          <p>
+            <strong>Thawing Tip:</strong> If frozen, thaw slowly in the refrigerator overnight. Avoid using warm water to maintain tenderness.
+          </p>
+          <p>
+            <strong>Recommended Dishes:</strong> World-famous for Desi Murgh Yakhni (energizing winter broth), Shorba Salan, Shinwari Karahi, and traditional Aseel Pulao.
+          </p>
+        </div>
+      ),
+    };
+  }
+
+  // 4. Live Poultry
+  const isLive = slug === "live-chicken" || cat.includes("live") || name.includes("live");
+
+  if (isLive) {
+    return {
+      tabTitle: "Live Poultry & Dressing Guide",
+      fallbackDesc: (
+        <>
+          <p>
+            Healthy, active <strong>{product.name}</strong> hand-selected from vetted bio-secure organic farms. Vaccinated and fed on 100% natural vegetarian grains.
+          </p>
+          <p>
+            Available for live delivery or fresh custom Halal slaughter and dressing per your family's exact portion requirements.
+          </p>
+        </>
+      ),
+      tips: (
+        <div className="space-y-3 text-xs md:text-sm text-brand-black/90">
+          <p>
+            <strong>Halal Zabiha Dressing:</strong> If requested with dressing, each bird is individually slaughtered by experienced Muslim butchers reciting Takbeer, thoroughly cleaned, and cut to your preference (Karahi Cut, Biryani Cut, or Whole Roast).
+          </p>
+          <p>
+            <strong>Post-Dressing Storage:</strong> Once dressed, chill below 4°C immediately or freeze if not cooking within 24–48 hours.
+          </p>
+        </div>
+      ),
+    };
+  }
+
+  // 5. General Desi Products (Other authentic items in Desi category)
+  if (slug === "desi-products" || cat.includes("desi")) {
+    return {
+      tabTitle: "Storage & Usage Tips",
+      fallbackDesc: (
+        <>
+          <p>
+            At Gosht Ghar, our <strong>{product.name}</strong> represents the finest traditional, pure, and organic produce sourced directly from trusted village farms.
+          </p>
+          <p>
+            Hygienically handled and packaged without chemical preservatives or artificial additives to bring genuine desi goodness to your home.
+          </p>
+        </>
+      ),
+      tips: (
+        <div className="space-y-3 text-xs md:text-sm text-brand-black/90">
+          <p>
+            <strong>Storage:</strong> Store in a cool, clean, and dry environment. Keep in an airtight container away from moisture and heat.
+          </p>
+          <p>
+            <strong>Quality Assurance:</strong> 100% authentic desi farm product prepared following traditional standards.
+          </p>
+        </div>
+      ),
+    };
+  }
+
+  // 6. Default Fresh Meat Cuts (Broiler Chicken, Mutton, Beef, Lamb, Keema)
+  return {
+    tabTitle: "Handling & Cooking Tips",
+    fallbackDesc: (
+      <>
+        <p>
+          At Gosht Ghar, every single cut of <strong>{product.name}</strong> is processed under strict 100% Halal guidelines. Our animals are grass-fed and naturally raised without any artificial growth hormones or antibiotics.
+        </p>
+        <p>
+          We vacuum pack your order immediately after dressing to preserve natural moisture, tenderness, and rich flavor right up to your kitchen doorstep.
+        </p>
+      </>
+    ),
+    tips: (
+      <div className="space-y-3 text-xs md:text-sm text-brand-black/90">
+        <p>
+          <strong>Storage:</strong> Store in refrigerator at 0°C to 4°C for immediate cooking within 48 hours, or freeze at -18°C for up to 3 months.
+        </p>
+        <p>
+          <strong>Thawing Tip:</strong> Thaw frozen cuts slowly in the refrigerator overnight. Avoid using warm water to preserve meat texture.
+        </p>
+        <p>
+          <strong>Recommended Dishes:</strong> Ideal for Karahi, Biryani, Roast, BBQ grilling, or slow-cooked curries.
+        </p>
+      </div>
+    ),
+  };
+}
+
 export default function ProductDetailPage({ params }: ProductPageProps) {
   const [product, setProduct] = useState<any | null>(null);
   const [relatedProducts, setRelatedProducts] = useState<any[]>([]);
@@ -60,6 +289,8 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
   const [addedToast, setAddedToast] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<"desc" | "specs" | "delivery">("desc");
   const { addToCart } = useCart();
+  
+  const careInfo = getProductCareInfo(product);
   
   const [zoomStyle, setZoomStyle] = useState<React.CSSProperties>({
     transformOrigin: "center center",
@@ -332,7 +563,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                     : "border-transparent text-gray-500 hover:text-brand-black"
                 }`}
               >
-                Handling & Cooking Tips
+                {careInfo.tabTitle}
               </button>
               <button
                 onClick={() => setActiveTab("delivery")}
@@ -351,25 +582,12 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                 {product.longDescription ? (
                   <p className="whitespace-pre-wrap">{product.longDescription}</p>
                 ) : (
-                  <>
-                    <p>
-                      At Gosht Ghar, every single cut of <strong>{product.name}</strong> is processed under strict 100% Halal guidelines. Our animals are grass-fed and naturally raised without any artificial growth hormones or antibiotics.
-                    </p>
-                    <p>
-                      We vacuum pack your order immediately after dressing to preserve natural moisture, tenderness, and rich flavor right up to your kitchen doorstep.
-                    </p>
-                  </>
+                  careInfo.fallbackDesc
                 )}
               </div>
             )}
 
-            {activeTab === "specs" && (
-              <div className="space-y-3 text-xs md:text-sm text-brand-black/90">
-                <p><strong>Storage:</strong> Store in refrigerator at 0°C to 4°C for immediate cooking within 48 hours, or freeze at -18°C for up to 3 months.</p>
-                <p><strong>Thawing Tip:</strong> Thaw frozen cuts slowly in the refrigerator overnight. Avoid using warm water to preserve meat texture.</p>
-                <p><strong>Recommended Dishes:</strong> Ideal for Karahi, Biryani, Roast, BBQ grilling, or slow-cooked curries.</p>
-              </div>
-            )}
+            {activeTab === "specs" && careInfo.tips}
 
             {activeTab === "delivery" && (
               <div className="space-y-3 text-xs md:text-sm text-brand-black/90">
