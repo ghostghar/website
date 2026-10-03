@@ -107,3 +107,17 @@ export async function uploadProductImage(imageData: string, token: string) {
   });
   return res.json();
 }
+
+export async function verifyAdminToken(token: string) {
+  try {
+    const res = await fetch("/api/auth/verify", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res.json();
+  } catch {
+    return { success: false, valid: false };
+  }
+}
+

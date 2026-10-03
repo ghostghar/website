@@ -13,6 +13,7 @@ import {
   seedDatabase,
   uploadProductImage,
   toggleTopPick,
+  verifyAdminToken,
 } from "@/lib/apiClient";
 
 export default function AdminDashboardPage() {
@@ -40,7 +41,11 @@ export default function AdminDashboardPage() {
 
 
   const uploadFile = async (file: File) => {
-    if (!file || !token) return;
+    if (!file) return;
+    if (!token) {
+      setUploadStatus("Admin token missing. Please sign in again.");
+      return;
+    }
     setIsUploadingImage(true);
     setUploadStatus("Uploading to Cloudinary...");
     try {
@@ -53,7 +58,13 @@ export default function AdminDashboardPage() {
           setProductForm((prev) => ({ ...prev, image: res.url }));
           setUploadStatus(res.isLocalFallback ? "Image loaded!" : "Uploaded to Cloudinary successfully!");
         } else {
-          setUploadStatus(res.error || "Failed to upload image");
+          const errMsg = res.error || "Failed to upload image";
+          if (errMsg.toLowerCase().includes("unauthorized") || errMsg.toLowerCase().includes("token")) {
+            setUploadStatus("Session expired: Please log in again.");
+            showStatus("error", "Your admin session expired. Please log out and sign in again.");
+          } else {
+            setUploadStatus(errMsg);
+          }
         }
         setIsUploadingImage(false);
       };
@@ -119,13 +130,28 @@ export default function AdminDashboardPage() {
     description: "",
   });
 
-  // Check stored auth token on mount
+  // Check stored auth token on mount & verify validity
   useEffect(() => {
-    const savedToken = localStorage.getItem("goshtghar_admin_token");
-    if (savedToken) {
-      setToken(savedToken);
-    }
-    setIsAuthLoading(false);
+    const initAuth = async () => {
+      const savedToken = localStorage.getItem("goshtghar_admin_token");
+      if (savedToken) {
+        try {
+          const res = await verifyAdminToken(savedToken);
+          if (res.valid) {
+            setToken(savedToken);
+          } else {
+            localStorage.removeItem("goshtghar_admin_token");
+            setToken(null);
+            setAuthError("Your previous session expired. Please enter your credentials to log in.");
+          }
+        } catch {
+          // If verify network fails, keep savedToken as fallback
+          setToken(savedToken);
+        }
+      }
+      setIsAuthLoading(false);
+    };
+    initAuth();
   }, []);
 
   // Fetch data when authenticated
@@ -222,7 +248,10 @@ export default function AdminDashboardPage() {
 
   const handleSaveProduct = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!token) return;
+    if (!token) {
+      showStatus("error", "Admin session missing. Please log in again.");
+      return;
+    }
 
     try {
       if (editingProductId) {
@@ -232,7 +261,13 @@ export default function AdminDashboardPage() {
           setIsProductModalOpen(false);
           loadDashboardData();
         } else {
-          showStatus("error", res.error || "Failed to update product.");
+          const errMsg = res.error || "Failed to update product.";
+          if (errMsg.toLowerCase().includes("unauthorized") || errMsg.toLowerCase().includes("token")) {
+            showStatus("error", "Your session has expired. Please log in again.");
+            handleLogout();
+          } else {
+            showStatus("error", errMsg);
+          }
         }
       } else {
         const res = await createProduct(productForm, token);
@@ -241,7 +276,13 @@ export default function AdminDashboardPage() {
           setIsProductModalOpen(false);
           loadDashboardData();
         } else {
-          showStatus("error", res.error || "Failed to create product.");
+          const errMsg = res.error || "Failed to create product.";
+          if (errMsg.toLowerCase().includes("unauthorized") || errMsg.toLowerCase().includes("token")) {
+            showStatus("error", "Your session has expired. Please log in again.");
+            handleLogout();
+          } else {
+            showStatus("error", errMsg);
+          }
         }
       }
     } catch (err: any) {
@@ -258,7 +299,13 @@ export default function AdminDashboardPage() {
         setDeleteConfirmId(null);
         loadDashboardData();
       } else {
-        showStatus("error", res.error || "Failed to delete product.");
+        const errMsg = res.error || "Failed to delete product.";
+        if (errMsg.toLowerCase().includes("unauthorized") || errMsg.toLowerCase().includes("token")) {
+          showStatus("error", "Your session has expired. Please log in again.");
+          handleLogout();
+        } else {
+          showStatus("error", errMsg);
+        }
       }
     } catch (err: any) {
       showStatus("error", err.message || "An error occurred.");
@@ -273,7 +320,13 @@ export default function AdminDashboardPage() {
         showStatus("success", !current ? "Marked as Top Pick ✓" : "Removed from Top Picks");
         loadDashboardData();
       } else {
-        showStatus("error", res.error || "Failed to update top pick status.");
+        const errMsg = res.error || "Failed to update top pick status.";
+        if (errMsg.toLowerCase().includes("unauthorized") || errMsg.toLowerCase().includes("token")) {
+          showStatus("error", "Your session has expired. Please log in again.");
+          handleLogout();
+        } else {
+          showStatus("error", errMsg);
+        }
       }
     } catch (err: any) {
       showStatus("error", err.message || "An error occurred.");
@@ -292,7 +345,13 @@ export default function AdminDashboardPage() {
         setIsCategoryModalOpen(false);
         loadDashboardData();
       } else {
-        showStatus("error", res.error || "Failed to create category.");
+        const errMsg = res.error || "Failed to create category.";
+        if (errMsg.toLowerCase().includes("unauthorized") || errMsg.toLowerCase().includes("token")) {
+          showStatus("error", "Your session has expired. Please log in again.");
+          handleLogout();
+        } else {
+          showStatus("error", errMsg);
+        }
       }
     } catch (err: any) {
       showStatus("error", err.message || "An error occurred.");
@@ -827,9 +886,23 @@ export default function AdminDashboardPage() {
                       Product Image (Cloudinary Direct Upload)
                     </label>
                     {uploadStatus && (
-                      <span className={`text-xs font-semibold ${uploadStatus.includes("successfully") || uploadStatus.includes("loaded") ? "text-emerald-400" : "text-amber-400"}`}>
-                        {uploadStatus}
-                      </span>
+                      <div className="flex items-center gap-2">
+                        <span className={`text-xs font-semibold ${uploadStatus.includes("successfully") || uploadStatus.includes("loaded") ? "text-emerald-400" : "text-amber-400"}`}>
+                          {uploadStatus}
+                        </span>
+                        {(uploadStatus.toLowerCase().includes("token") || uploadStatus.toLowerCase().includes("session") || uploadStatus.toLowerCase().includes("unauthorized")) && (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setIsProductModalOpen(false);
+                              handleLogout();
+                            }}
+                            className="text-[11px] bg-[#ED1C24] hover:bg-[#C8151C] text-white font-semibold px-2 py-0.5 rounded transition"
+                          >
+                            Sign In Again
+                          </button>
+                        )}
+                      </div>
                     )}
                   </div>
 
